@@ -16,6 +16,13 @@
     <div class="h-full px-3 py-4 overflow-y-auto bg-gray-50">
         <ul class="space-y-2 font-medium">
             <li>
+                <a href="{{ route('index') }}" class="flex items-center ps-2 mb-7">
+                    <img src="{{ asset('asset/img/logo/1.png') }}" class="h-6 me-1 sm:h-7"
+                         alt="Flowbite Logo"/>
+                    <span class="self-center text-xl font-semibold whitespace-nowrap">Quizlet</span>
+                </a>
+            </li>
+            <li>
                 <a href="{{ route('index') }}"
                    class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group
                    active:underline">
