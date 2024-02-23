@@ -22,11 +22,11 @@
         </div>
         <div class="flex items-start mb-5">
             <div class="flex items-center h-5">
-                <input id="remember" type="checkbox" value=""
+                <input id="status" type="checkbox" value=""
                        class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3
                        focus:ring-blue-300" required/>
             </div>
-            <label for="remember" class="ms-2 text-sm font-medium text-gray-900">Remember me</label>
+            <label for="status" class="ms-2 text-sm font-medium text-gray-900">Remember me</label>
         </div>
         <div class="flex justify-between items-center gap-3">
             <span>
