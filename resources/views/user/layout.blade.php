@@ -11,7 +11,7 @@
 <body class="antialiased">
 @include('components.common.header')
 
-@yield('user.partials.content')
+@yield('content')
 
 @include('components.common.footer')
 </body>

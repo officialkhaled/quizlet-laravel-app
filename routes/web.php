@@ -1,18 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::group([], (function () {
-    Route::get('/', [AuthController::class, 'index'])->name('index');
-    Route::get('/login', [AuthController::class, 'login'])->name('login');
-    Route::get('/register', [AuthController::class, 'register'])->name('register');
-}));
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -20,9 +15,14 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/dashboard', [UserController::class, 'index'])->name('index');
+    Route::get('/quiz', [UserController::class, 'quiz'])->name('quiz');
+});
+
+Route::controller(AdminController::class)->group(function () {
+    Route::get('/admin/logout', 'destroy')->name('admin.logout');
+});
 
 
 require __DIR__ . '/auth.php';
