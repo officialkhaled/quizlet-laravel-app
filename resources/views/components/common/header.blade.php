@@ -11,7 +11,7 @@
                 <a href="{{ route('login') }}"
                    class="text-sm text-white font-bold uppercase bg-blue-700 px-4 py-2 rounded-lg
                    hover:bg-blue-800">Login</a>
-                <a href="{{ '' }}"
+                <a href="{{ route('register') }}"
                    class="text-sm text-black font-bold uppercase bg-gray-200 px-4 py-2 rounded-lg
                    hover:bg-blue-800 hover:text-white">Register</a>
             </div>

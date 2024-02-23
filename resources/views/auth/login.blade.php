@@ -28,10 +28,21 @@
             </div>
             <label for="remember" class="ms-2 text-sm font-medium text-gray-900">Remember me</label>
         </div>
-        <button type="submit"
-                class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">
-            Submit
-        </button>
+        <div class="flex justify-between items-center gap-3">
+            <span>
+                Don't have an account? <a href="{{ route('register') }}" class="text-blue-600
+                font-semibold
+                hover:text-blue-800 hover:underline"> Register</a>
+            </span>
+
+            <button type="submit"
+                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                focus:outline-none
+                focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5
+                py-2.5 text-center">
+                Submit
+            </button>
+        </div>
     </form>
 
 </x-guest-layout>
