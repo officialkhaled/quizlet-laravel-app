@@ -11,6 +11,10 @@
 <body class="antialiased">
 @include('components.partials.header')
 
+@auth
+    @include('components.common.sidebar')
+@endauth
+
 @yield('content')
 
 @include('components.partials.footer')

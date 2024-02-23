@@ -10,6 +10,9 @@
 </head>
 <body class="antialiased">
 @include('components.common.header')
+@auth
+    @include('components.common.sidebar')
+@endauth
 
 @yield('content')
 

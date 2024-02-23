@@ -10,4 +10,14 @@ class UserController extends Controller
     {
         return view('user.partials.dashboard');
     }
+
+    public function welcome_quiz()
+    {
+        return view('user.partials.welcome-quiz');
+    }
+
+    public function quiz()
+    {
+        return view('user.partials.quiz');
+    }
 }

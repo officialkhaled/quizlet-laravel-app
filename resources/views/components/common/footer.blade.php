@@ -22,7 +22,7 @@
                 </ul>
             </div>
             <hr class="my-6 border-gray-200 sm:mx-auto lg:my-8"/>
-            <span class="block text-sm text-gray-500 sm:text-center">© 2024 Quizlet. All Rights Reserved.</span>
+            <span class="block text-sm text-gray-500 sm:text-center">Quizlet © 2024. All Rights Reserved.</span>
         </div>
     </footer>
 @endguest
