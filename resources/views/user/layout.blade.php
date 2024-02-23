@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth focus:scroll-auto">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,8 +10,11 @@
 </head>
 <body class="antialiased">
 @include('components.common.header')
+@auth
+    @include('components.common.sidebar')
+@endauth
 
-@yield('user.partials.content')
+@yield('content')
 
 @include('components.common.footer')
 </body>

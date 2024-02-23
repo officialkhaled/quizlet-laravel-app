@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="en" class="scroll-smooth focus:scroll-auto">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Quizlet App</title>
-    @vite(['resources/css/app.css','resources/js/app.js'])
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.bunny.net">
-    <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet"/>
+
+    @include('components.partials.imports')
+
 </head>
 <body class="antialiased">
-@include('user.partials.header')
+@include('components.partials.header')
 
-@yield('user.partials.content')
+@auth
+    @include('components.common.sidebar')
+@endauth
 
-@include('user.partials.footer')
+@yield('content')
+
+@include('components.partials.footer')
 </body>
 </html>
