@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Quizlet App</title>
 
-    @include('components.partials.imports')
+    @include('components.common.imports')
 
 </head>
 <body class="antialiased">
-@include('components.partials.header')
+@include('components.common.header')
 
 @auth
     @include('components.common.sidebar')
@@ -17,6 +17,6 @@
 
 @yield('content')
 
-@include('components.partials.footer')
+@include('components.common.footer')
 </body>
 </html>

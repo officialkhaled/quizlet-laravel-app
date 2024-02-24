@@ -52,6 +52,15 @@ class LoginRequest extends FormRequest
         RateLimiter::clear($this->throttleKey());
     }
 
+    public function redirectBasedOnUserType()
+    {
+        if (Auth::user()->usertype == 0) {
+            return redirect()->route('admin.dashboard');
+        } else {
+            return redirect()->route('user.dashboard');
+        }
+    }
+
     /**
      * Ensure the login request is not rate limited.
      *

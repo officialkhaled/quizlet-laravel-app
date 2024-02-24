@@ -24,8 +24,9 @@
                 <p class="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl ">
                     Dive into a world of learning with endless quizzes across all your favorite
                     topics.</p>
-                <a href="{{ route('login') }}"
-                   class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base
+                <button data-modal-target="authentication-modal"
+                        data-modal-toggle="authentication-modal"
+                        class="inline-flex items-center justify-center px-5 py-3 mr-3 text-base
                    font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800
                    focus:ring-4 focus:ring-primary-300">
                     Get started
@@ -35,7 +36,7 @@
                               d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
                               clip-rule="evenodd"></path>
                     </svg>
-                </a>
+                </button>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
                 <img src="{{ asset('asset/img/logo/2.png') }}" alt="hero-image">
@@ -94,7 +95,7 @@
         </section>
     </div>
 
-    {{--  --}}
+    {{-- Teachers - Feedback --}}
     <section class="mx-auto max-w-screen-xl my-28">
         <div
             class="grid mb-8 border border-gray-200 rounded-lg shadow-sm md:mb-12 md:grid-cols-2 bg-white">
@@ -181,6 +182,81 @@
             </figure>
         </div>
     </section>
+
+    {{-- Modal --}}
+    <div id="authentication-modal" tabindex="-1" aria-hidden="true"
+         class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
+        <div class="relative p-4 w-full max-w-md max-h-full">
+            <div class="relative bg-white rounded-lg shadow">
+                <div
+                    class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                        Sign in to our platform
+                    </h3>
+                    <button type="button"
+                            class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
+                            data-modal-hide="authentication-modal">
+                        <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                             fill="none" viewBox="0 0 14 14">
+                            <path stroke="currentColor" stroke-linecap="round"
+                                  stroke-linejoin="round" stroke-width="2"
+                                  d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
+                        </svg>
+                        <span class="sr-only">Close modal</span>
+                    </button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="p-4 md:p-5">
+                    <form method="POST" action="{{ route('login') }}" class="space-y-4">
+                        @csrf
+                        <div class="mb-5">
+                            <label for="username" class="block mb-2 text-sm font-medium text-gray-900
+            dark:text-white">Username</label>
+                            <input type="text" id="username" name="username"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                   focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                   placeholder="Username" required/>
+                            <x-input-error :messages="$errors->get('username')" class="mt-2"/>
+                        </div>
+                        <div class="mb-5">
+                            <label for="password"
+                                   class="block mb-2 text-sm font-medium text-gray-900
+                   dark:text-white">Password</label>
+                            <input type="password" id="password" name="password"
+                                   class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
+                   focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                   placeholder="Password" required/>
+                            <x-input-error :messages="$errors->get('password')" class="mt-2"/>
+                        </div>
+                        <div class="flex items-start mb-5">
+                            <div class="flex items-center h-5">
+                                <input id="status" type="checkbox" value=""
+                                       class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3
+                       focus:ring-blue-300"/>
+                            </div>
+                            <label for="status" class="ms-2 text-sm font-medium text-gray-900">Remember
+                                me</label>
+                        </div>
+                        <div class="flex justify-between items-center gap-3">
+            <span>
+                Don't have an account? <a href="{{ route('register') }}" class="text-blue-600
+                font-semibold hover:text-blue-800 hover:underline"> Register</a>
+            </span>
+
+                            <button type="submit"
+                                    class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4
+                    focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full
+                    sm:w-auto px-5 py-2.5 text-center">
+                                Login
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </main>
 
 @include('components.common.footer')
