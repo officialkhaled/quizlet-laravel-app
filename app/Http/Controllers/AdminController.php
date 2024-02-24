@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,7 +12,10 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.partials.dashboard');
+        $id = Auth::user()->id;
+        $adminData = User::find($id);
+
+        return view('admin.partials.dashboard', compact('adminData'));
     }
 
     public function view_quiz()

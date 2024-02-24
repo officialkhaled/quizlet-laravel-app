@@ -54,9 +54,9 @@
                         </div>
                     </div>
 
-                    {{-- Multiple Questions --}}
+                    {{-- Questions 1 --}}
                     <div id="questionsContainer">
-                        <div class="questionBlock grid grid-cols-12 md:gap-6
+                        <div class="questionBlock mt-4 grid grid-cols-12 md:gap-6
                      border-2 border-blue-200 rounded-lg p-6">
                             <div class="col-span-11 relative z-0 w-full group">
                                 <input type="text" name="questions[0]"
@@ -87,8 +87,8 @@
                                         </select>
                                     </div>
                                     {{-- Radio --}}
-                                    <div
-                                        class="hidden mt-4 border-2 border-b-gray-200 rounded-lg p-6">
+                                    <div class="mt-4 border-2 border-b-gray-200
+                                    rounded-lg p-6">
                                         <fieldset>
                                             <legend class="sr-only">Countries</legend>
 
@@ -138,9 +138,66 @@
                                             </div>
                                         </fieldset>
                                     </div>
+                                </div>
+
+
+                            </div>
+
+                            {{-- Add button--}}
+                            <div
+                                class="col-span-1 relative z-0 w-full pt-3 group right-3 ">
+                                <button type="button" onclick="addNewQuestion()"
+                                        class="addQuestionButton text-green-500
+                                font-medium
+                                        text-sm px-5 py-2 text-center">
+                                    <svg class="w-10 h-10" fill="currentColor"
+                                         clip-rule="evenodd"
+                                         fill-rule="evenodd" stroke-linejoin="round"
+                                         stroke-miterlimit="2" viewBox="0 0 24 24"
+                                         xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="m12.002 2c5.518 0 9.998 4.48 9.998 9.998 0 5.517-4.48 9.997-9.998 9.997-5.517 0-9.997-4.48-9.997-9.997 0-5.518 4.48-9.998 9.997-9.998zm-.747 9.25h-3.5c-.414 0-.75.336-.75.75s.336.75.75.75h3.5v3.5c0 .414.336.75.75.75s.75-.336.75-.75v-3.5h3.5c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-3.5v-3.5c0-.414-.336-.75-.75-.75s-.75.336-.75.75z"
+                                            fill-rule="nonzero"/>
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {{-- Questions 2 --}}
+                    <div id="questionsContainer">
+                        <div class="questionBlock mt-4 grid grid-cols-12 md:gap-6
+                     border-2 border-blue-200 rounded-lg p-6">
+                            <div class="col-span-11 relative z-0 w-full group">
+                                <input type="text" name="questions[0]"
+                                       id="floating_first_name"
+                                       class="questionInput block py-2.5 px-0 w-full text-sm
+                                   text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                       placeholder=" " required/>
+                                <label for="floating_first_name"
+                                       class="peer-focus:font-medium absolute text-sm text-gray-500
+                                   dark:text-gray-400 duration-300 transform -translate-y-6
+                                   scale-75 top-3 -z-10 origin-[0] peer-focus:start-0
+                                   rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600
+                                   peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100
+                                    peer-placeholder-shown:translate-y-0 peer-focus:scale-75
+                                    peer-focus:-translate-y-6">
+                                    Question 2
+                                </label>
+
+                                <div>
+                                    <div class="mt-4 p-6">
+                                        <select name="answer_types[0]"
+                                                class="answerType block py-2 px-3 w-full text-sm
+                                             text-gray-900 bg-gray-50 rounded-md border
+                                             border-gray-300 focus:outline-none focus:ring-0 focus:border-blue-600">
+                                            <option value="radio">Radio (Single Answer)</option>
+                                            <option value="checkbox">Checkbox (Multiple Answers)
+                                            </option>
+                                        </select>
+                                    </div>
                                     {{-- Checkbox --}}
-                                    <div
-                                        class="hidden mt-2 border-2 border-b-gray-200 rounded-lg p-6">
+                                    <div class="mt-2 border-2 border-b-gray-200 rounded-lg p-6">
                                         <fieldset>
                                             <legend class="sr-only">Checkbox variants</legend>
 
@@ -185,7 +242,9 @@
                             {{-- Add button--}}
                             <div
                                 class="col-span-1 relative z-0 w-full pt-3 group right-3 ">
-                                <button type="button" class="addQuestionButton text-green-500 font-medium
+                                <button type="button" onclick="addNewQuestion()"
+                                        class="addQuestionButton text-green-500
+                                font-medium
                                         text-sm px-5 py-2 text-center">
                                     <svg class="w-10 h-10" fill="currentColor"
                                          clip-rule="evenodd"
@@ -200,6 +259,8 @@
                             </div>
                         </div>
                     </div>
+
+                    {{-- Answers --}}
                     {{--<div class="relative z-0 w-full mb-5 group">
                         --}}{{-- Radio --}}{{--
                         <div class="mt-2 border-2 border-b-gray-200 rounded-lg p-6">
@@ -303,6 +364,32 @@
 
 @endsection
 @section('scripts')
+    <script>
+        $(document).ready(function () {
+            // Function to add a new question block
+            function addNewQuestion() {
+                var $container = $("#questionsContainer");
+                var $newBlock = $container.find(".questionBlock:first").clone();
+
+                // Reset input values and remove IDs for cloned elements
+                $newBlock.find('input[type="text"]').val('');
+                $newBlock.find('select.answerType').val('radio'); // Reset to default value
+
+                // Append the new question block to the container
+                $container.append($newBlock);
+            }
+
+            // Attach event handler for adding new questions
+            $('body').on('click', '.addQuestionButton', function () {
+                addNewQuestion();
+            });
+
+            // Example function to toggle answer fields based on selected answer type
+            $('body').on('change', '.answerType', function () {
+                // Implementation for toggling answer fields...
+            });
+        });
+    </script>
     <script type="module">
         $(document).ready(function () {
             // Function to add a new question block
