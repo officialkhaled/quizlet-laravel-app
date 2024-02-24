@@ -14,9 +14,9 @@
                        class="text-sm text-white font-bold uppercase bg-blue-700 px-4 py-2
                        rounded-lg hover:bg-blue-800">Login</a>
                     <a href="{{ route('register') }}"
-                       class="text-sm text-black font-bold uppercase bg-gray-200 px-4 py-2
-                       rounded-lg hover:bg-blue-800 hover:text-white">Register</a>
-
+                       class="text-sm text-black font-bold uppercase border border-gray-500
+                       hover:bg-gray-500 px-4 py-2
+                       rounded-lg hover:text-white">Register</a>
 
                     {{--@auth
                         <form method="POST" action="{{ route('logout') }}">
@@ -27,7 +27,6 @@
                             </button>
                         </form>
                     @endauth--}}
-
 
                 </div>
             </div>
