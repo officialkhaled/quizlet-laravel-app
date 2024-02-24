@@ -26,8 +26,17 @@ class AdminController extends Controller
         return view('admin.partials.create-quiz');
     }
 
-    public function storeQuestion(Request $request, Question $question)
+    public function storeQuestion(Request $request)
     {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+        ]);
 
+        $question = Question::create([
+            'title' => $request->title,
+            'question_text' => $request->question_text,
+        ]);
+
+        return redirect('view-quiz');
     }
 }

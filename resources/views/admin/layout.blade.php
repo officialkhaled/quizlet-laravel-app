@@ -19,4 +19,6 @@
 
 @include('components.common.footer')
 </body>
+
 </html>
+
