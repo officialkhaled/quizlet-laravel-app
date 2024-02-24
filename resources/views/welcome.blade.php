@@ -208,7 +208,7 @@
 
                 <!-- Modal body -->
                 <div class="p-4 md:p-5">
-                    <form method="POST" action="{{ route('login') }}" class="space-y-4">
+                    <form method="POST" action="{{ route('login') }}" class="">
                         @csrf
                         <div class="mb-5">
                             <label for="username" class="block mb-2 text-sm font-medium text-gray-900
@@ -230,13 +230,13 @@
                             <x-input-error :messages="$errors->get('password')" class="mt-2"/>
                         </div>
                         <div class="flex items-start mb-5">
-                            <div class="flex items-center h-5">
-                                <input id="status" type="checkbox" value=""
-                                       class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3
-                       focus:ring-blue-300"/>
-                            </div>
-                            <label for="status" class="ms-2 text-sm font-medium text-gray-900">Remember
-                                me</label>
+                            @if (Route::has('password.request'))
+                                <a class=" hover:underline text-sm text-gray-600 hover:text-gray-900 rounded-md
+                    focus:outline-none"
+                                   href="{{ route('password.request') }}">
+                                    Forgot your password?
+                                </a>
+                            @endif
                         </div>
                         <div class="flex justify-between items-center gap-3">
             <span>

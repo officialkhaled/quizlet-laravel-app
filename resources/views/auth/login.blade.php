@@ -25,11 +25,14 @@
         </div>
         <div class="flex items-start mb-5">
             <div class="flex items-center h-5">
-                <input id="status" type="checkbox" value=""
-                       class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3
-                       focus:ring-blue-300"/>
+                @if (Route::has('password.request'))
+                    <a class=" hover:underline text-sm text-gray-600 hover:text-gray-900 rounded-md
+                    focus:outline-none"
+                       href="{{ route('password.request') }}">
+                        Forgot your password?
+                    </a>
+                @endif
             </div>
-            <label for="status" class="ms-2 text-sm font-medium text-gray-900">Remember me</label>
         </div>
         <div class="flex justify-between items-center gap-3">
             <span>
