@@ -2,17 +2,18 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Question extends Model
 {
     use HasFactory;
 
+    protected $table = 'questions';
+
     protected $fillable = [
         'quiz_id',
-        'question_text',
-        'timer'
+        'content',
     ];
 
     public function quiz()
@@ -20,8 +21,13 @@ class Question extends Model
         return $this->belongsTo(Quiz::class);
     }
 
-    public function answers()
+    public function options()
     {
-        return $this->hasMany(Answer::class);
+        return $this->hasMany(Option::class);
+    }
+
+    public function responses()
+    {
+        return $this->hasMany(Response::class);
     }
 }

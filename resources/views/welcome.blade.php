@@ -261,5 +261,7 @@
 
 @include('components.common.footer')
 
+@include('components.common.scripts')
+
 </body>
 </html>

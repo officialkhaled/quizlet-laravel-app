@@ -12,6 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
+    protected $table = 'users';
+
     protected $fillable = [
         'name',
         'email',
@@ -38,5 +40,15 @@ class User extends Authenticatable
     public function isUser()
     {
         return $this->usertype == 1;
+    }
+
+    public function takes()
+    {
+        return $this->hasMany(Take::class);
+    }
+
+    public function quizzes()
+    {
+        return $this->hasMany(Quiz::class, 'takes');
     }
 }

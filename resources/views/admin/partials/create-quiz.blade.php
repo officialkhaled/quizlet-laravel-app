@@ -185,8 +185,7 @@
                             {{-- Add button--}}
                             <div
                                 class="col-span-1 relative z-0 w-full pt-3 group right-3 ">
-                                <button type="button" onclick="addQuestion()"
-                                        class="addQuestionButton text-green-500 font-medium
+                                <button type="button" class="addQuestionButton text-green-500 font-medium
                                         text-sm px-5 py-2 text-center">
                                     <svg class="w-10 h-10" fill="currentColor"
                                          clip-rule="evenodd"
@@ -304,47 +303,37 @@
 
 @endsection
 @section('scripts')
-    <script>
-        // Function to add a new question block
-        function addQuestion() {
-            const container = document.getElementById('questionsContainer');
-            const newBlock = container.children[0].cloneNode(true);
+    <script type="module">
+        $(document).ready(function () {
+            // Function to add a new question block
+            function addQuestion() {
+                var $container = $("#questionsContainer");
+                var $newBlock = $container.find(".questionBlock:first").clone();
 
-            // Reset input values
-            newBlock.querySelector('.questionInput').value = '';
-            newBlock.querySelector('.answerType').selectedIndex = 0;
-            newBlock.querySelector('.answersContainer').innerHTML = ''; // Clear previous answers
+                // Reset input values and remove IDs for cloned elements
+                $newBlock.find('input[type="text"]').val('');
+                $newBlock.find('select.answerType').val('radio'); // Reset to default value
+                $newBlock.find('.answersContainer').empty(); // Clear the answers container
 
-            // Adjust name attributes to ensure they are unique
-            const index = container.children.length;
-            newBlock.querySelector('.questionInput').name = `questions[${index}]`;
-            newBlock.querySelector('.answerType').name = `answer_types[${index}]`;
+                // Append the new question block to the container
+                $container.append($newBlock);
+            }
 
-            container.appendChild(newBlock);
-        }
-
-        // Function to toggle answer fields based on selected answer type
-        function toggleAnswerFields(select) {
-            const answersContainer = select.closest('.questionBlock').querySelector('.answersContainer');
-            answersContainer.innerHTML = ''; // Clear previous fields
-
-            const answerType = select.value;
-            const nameBase = select.name.replace('answer_types', 'answers');
-            const options = ['Option 1', 'Option 2']; // Example options
-
-            options.forEach((option, index) => {
-                const input = document.createElement('input');
-                input.type = answerType; // radio or checkbox
-                input.name = answerType === 'radio' ? `${nameBase}` : `${nameBase}[]`;
-                input.value = option;
-
-                const label = document.createElement('label');
-                label.textContent = option;
-                label.prepend(input);
-
-                answersContainer.appendChild(label);
-                answersContainer.appendChild(document.createElement('br'));
+            // Attach event handler for adding new questions
+            $('body').on('click', '.addQuestionButton', function () {
+                addQuestion();
             });
-        }
+
+            // Function to toggle answer fields based on selected answer type
+            $('body').on('change', '.answerType', function () {
+                var $this = $(this);
+                var $answersContainer = $this.closest('.questionBlock').find('.answersContainer');
+                $answersContainer.empty(); // Clear previous answer fields
+
+                // Add new answer fields based on the selected answer type...
+            });
+        });
+
     </script>
+
 @endsection
