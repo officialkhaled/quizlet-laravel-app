@@ -51,10 +51,11 @@
                 class="flex flex-col gap-4 items-center max-w-sm p-6 bg-white border h-72
                 border-gray-200 rounded-lg shadow-lg">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-gray-900">
-                    Noteworthy technology acquisitions 2021</h5>
-                <p class="mb-3 font-normal text-gray-700 text-center">Here are the biggest
-                    enterprise technology acquisitions of 2021 so far, in reverse chronological
-                    order.</p>
+                    What's Your Leadership Style?</h5>
+                <p class="mb-3 font-normal text-gray-700 text-center pt-2 h-24">Discover the leader
+                    within and
+                    steer your path to success. Perfect for professionals looking to understand
+                    their unique leadership qualities.</p>
                 <a href="#"
                    class="flex justify-center px-8 items-center py-2 text-sm font-medium text-center
                    text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
@@ -66,10 +67,10 @@
                 class="flex flex-col gap-4 items-center max-w-sm p-6 bg-white border h-72
                 border-gray-200 rounded-lg shadow-lg">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-gray-900">
-                    Noteworthy technology acquisitions 2021</h5>
-                <p class="mb-3 font-normal text-gray-700 text-center">Here are the biggest
-                    enterprise technology acquisitions of 2021 so far, in reverse chronological
-                    order.</p>
+                    Your Historical Era Match</h5>
+                <p class="mb-3 font-normal text-gray-700 text-center pt-2 h-24">Time travel through
+                    the quiz
+                    and find out which period of history resonates with your spirit.</p>
                 <a href="#"
                    class="flex justify-center px-8 items-center py-2 text-sm font-medium text-center
                    text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
@@ -81,10 +82,12 @@
                 class="flex flex-col gap-4 items-center max-w-sm p-6 bg-white border h-72
                 border-gray-200 rounded-lg shadow-lg">
                 <h5 class="mb-2 text-2xl font-bold tracking-tight text-center text-gray-900">
-                    Noteworthy technology acquisitions 2021</h5>
-                <p class="mb-3 font-normal text-gray-700 text-center">Here are the biggest
-                    enterprise technology acquisitions of 2021 so far, in reverse chronological
-                    order.</p>
+                    Are You a Safe Driver?</h5>
+                <p class="mb-3 font-normal text-gray-700 text-center pt-2 h-24"> Buckle up and test
+                    your
+                    road
+                    knowledge. Essential for everyone on the road wanting to ensure they're keeping
+                    safety a priority.</p>
                 <a href="#"
                    class="flex justify-center px-8 items-center py-2 text-sm font-medium text-center
                    text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
