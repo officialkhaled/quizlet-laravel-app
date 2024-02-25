@@ -12,22 +12,10 @@ class Question extends Model
     protected $table = 'questions';
 
     protected $fillable = [
-        'quiz_id',
-        'content',
+        'exam_id',
+        'questions',
+        'ans',
+        'options',
+        'status'
     ];
-
-    public function quiz()
-    {
-        return $this->belongsTo(Quiz::class);
-    }
-
-    public function options()
-    {
-        return $this->hasMany(Option::class);
-    }
-
-    public function responses()
-    {
-        return $this->hasMany(Response::class);
-    }
 }

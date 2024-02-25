@@ -4,19 +4,21 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
     public function up(): void
     {
-        Schema::create('responses', function (Blueprint $table) {
+        Schema::create('results', function (Blueprint $table) {
             $table->id();
 
-            $table->foreignId('take_id')->constrained();
-            $table->foreignId('option_id')->constrained();
-            $table->foreignId('question_id')->constrained();
-            $table->string('content');
+            $table->string('exam_id');
+            $table->string('user_id');
+            $table->string('yes_ans');
+            $table->string('no_ans');
+            $table->string('result_json');
 
             $table->timestamps();
         });
@@ -27,6 +29,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('responses');
+        Schema::dropIfExists('results');
     }
 };

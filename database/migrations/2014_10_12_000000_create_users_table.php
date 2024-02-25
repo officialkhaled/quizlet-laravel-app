@@ -18,7 +18,9 @@ return new class extends Migration {
             $table->string('username')->unique();
             $table->smallInteger('usertype')->default(1)->comment('0: admin, 1:user');
             $table->timestamp('email_verified_at')->nullable();
-            $table->tinyInteger('status')->default(0)->comment('0: remember, 1: forget');
+            $table->string('mobile_no')->nullable();
+            $table->string('exam')->nullable();
+            $table->string('status')->nullable();
             $table->string('password');
 
             $table->rememberToken();

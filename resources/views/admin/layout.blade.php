@@ -15,7 +15,9 @@
     @include('components.common.sidebar')
 @endauth
 
-@yield('content')
+<div class="min-h-screen bg-gray-100">
+    @yield('content')
+</div>
 
 @include('components.common.footer')
 

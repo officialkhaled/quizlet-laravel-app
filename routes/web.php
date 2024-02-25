@@ -13,12 +13,14 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+/* User Routes*/
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
     Route::get('/welcome-quiz', [UserController::class, 'welcome_quiz'])->name('welcome-quiz');
     Route::get('/quiz', [UserController::class, 'quiz'])->name('quiz');
 });
 
+/* Admin Routes */
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/view-quiz', [AdminController::class, 'view_quiz'])->name('view-quiz');
