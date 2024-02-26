@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Validator;
 
 class AdminController extends Controller
 {
+    /* Category */
     public function index()
     {
         $id = Auth::user()->id;
@@ -52,7 +53,7 @@ class AdminController extends Controller
 
             return redirect()->back()->with('success', 'Category added successfully.');
         } catch (\Exception $e) {
-            return redirect()->back()->with('error', 'Something went wrong.', 500);
+            return redirect()->back()->with('error', 'Something went wrong.');
         }
     }
 
@@ -74,6 +75,7 @@ class AdminController extends Controller
         return back()->with('success', 'Category status updated successfully.');
     }
 
+    /* needs work -- start */
     public function edit(Category $category)
     {
         return view('edit-category', compact('category'));
@@ -92,14 +94,12 @@ class AdminController extends Controller
         return redirect()->route('some.route')->with('success', 'Category updated successfully.');
     }
 
-    //Editing the categories
     public function edit_category($id)
     {
         $category = Category::where('id', $id)->get()->first();
         return view('admin.category', ['category' => $category]);
     }
 
-    //Editing the categories
     public function Editing(Request $request, Category $category)
     {
         $cat = Category::where('id', $request->id)->get()->first();
@@ -107,21 +107,93 @@ class AdminController extends Controller
         $cat->update();
         echo json_encode(array('status' => 'true', 'message' => 'updated successfully', 'reload' => route('category')));
     }
+    /* need work -- end */
+
+    /* Manage Quiz */
+    public function manage_quiz()
+    {
+        $categories = Category::where('status', '1')->paginate(10);
+        $quizzes = Quiz::select(['quizzes.*', 'categories.name as cat_name'])
+            ->join('categories', 'quizzes.category', '=', 'categories.id')
+            ->paginate(10);
+
+        return view('admin.partials.manage-quiz', compact('categories', 'quizzes'));
+    }
+
+    public function add_quiz(Request $request, Quiz $quiz)
+    {
+        $validatedData = $request->validate([
+            'title' => 'required',
+            'category' => 'required',
+            'exam_date' => 'required',
+            'exam_duration' => 'required|numeric|min:10',
+        ]);
+
+        try {
+            $quiz->fill($validatedData)->save();
+            return redirect()->back()->with('success', 'Quiz added successfully.');
+        } catch (\Exception $e) {
+            return redirect()->back()->with('error', 'Something went wrong.');
+        }
+    }
+    /*
+            if ($validatedData->fails()) {
+                $arr = array('status' => 'false', 'message' => $validator->errors()->all());
+            } else {
+
+                $exam = new Oex_exam_master();
+                $exam->title = $request->title;
+                $exam->exam_date = $request->exam_date;
+                $exam->exam_duration = $request->exam_duration;
+                $exam->category = $request->exam_category;
+                $exam->status = 1;
+                $exam->save();
+
+                $arr = array('status' => 'true', 'message' => 'exam added successfully', 'reload' => url('admin/manage_exam'));
+
+            }
+
+            echo json_encode($arr);*/
 
 
-    public function view_quiz()
+    //editing exam status
+    public
+    function quiz_status($id)
+    {
+        $quiz = Quiz::findOrFail($id);
+
+        $quiz->status = $quiz->status == 1 ? 0 : 1;
+        $quiz->save();
+
+        return back()->with('success', 'Quiz status updated successfully.');
+    }
+
+    //Deleting exam status
+    public
+    function delete_exam($id)
+    {
+        $exam1 = Oex_exam_master::where('id', $id)->get()->first();
+        $exam1->delete();
+        return redirect(url('admin/manage_exam'));
+    }
+
+
+    public
+    function view_quiz()
     {
         $questions = Question::all();
 
         return view('admin.partials.view-quiz');
     }
 
-    public function create_quiz()
+    public
+    function create_quiz()
     {
         return view('admin.partials.create-quiz');
     }
 
-    public function storeQuestion(Request $request)
+    public
+    function storeQuestion(Request $request)
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],

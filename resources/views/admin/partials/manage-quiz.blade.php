@@ -8,7 +8,7 @@
                     <ol class="flex items-center w-full p-3 space-x-2 text-sm font-medium
                     text-center text-gray-500 border border-gray-200 rounded-lg sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse">
                         <li class="flex items-center">
-                            Category
+                            Manage Quiz
                             <svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 10">
                                 <path stroke="currentColor" stroke-linecap="round"
@@ -17,7 +17,7 @@
                             </svg>
                         </li>
                         <li class="flex items-center text-blue-600">
-                            Category List
+                            Quiz List
                             {{--<svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 10">
                                 <path stroke="currentColor" stroke-linecap="round"
@@ -57,7 +57,13 @@
                                     SL
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center">
-                                    Name
+                                    Title
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    Category
+                                </th>
+                                <th scope="col" class="px-6 py-3 text-center">
+                                    Exam Date
                                 </th>
                                 <th scope="col" class="px-6 py-3 text-center">
                                     Status
@@ -70,23 +76,29 @@
                             </tr>
                             </thead>
                             <tbody class="text-gray-900">
-                            @forelse($categories as $category)
+                            @forelse($quizzes as $quiz)
                                 <tr class="bg-white border-b">
                                     <th scope="row"
                                         class="px-6 py-2 font-medium  whitespace-nowrap text-center">
-                                        {{ $loop->iteration + $categories->firstItem() - 1 }}
+                                        {{ $loop->iteration + $quizzes->firstItem() - 1 }}
                                     </th>
                                     <td class="px-6 py-2 min-w-52 max-w-52 text-center">
-                                        {{ $category->name }}
+                                        {{ $quiz->title }}
+                                    </td>
+                                    <td class="px-6 py-2 min-w-52 max-w-52 text-center">
+                                        {{ $quiz->cat_name }}
+                                    </td>
+                                    <td class="px-6 py-2 min-w-52 max-w-52 text-center">
+                                        {{ $quiz->exam_date }}
                                     </td>
                                     <td class="px-6 py-2 text-center ">
-                                        <form action="{{ route('update-status', $category->id) }}"
+                                        <form action="{{ route('update-status', $quiz->id) }}"
                                               method="POST">
                                             @csrf
                                             @method('PATCH')
                                             <label class="inline-flex items-center cursor-pointer">
                                                 <input type="checkbox" value="" class="sr-only peer"
-                                                       onchange="this.form.submit()" {{ $category->status == 1 ? 'checked' : '' }}>
+                                                       onchange="this.form.submit()" {{ $quiz->status == 1 ? 'checked' : '' }}>
                                                 <div
                                                     class="relative w-9 h-5 bg-gray-200
                                         peer-focus:outline-none rounded-full peer
@@ -98,31 +110,32 @@
                                         after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600">
                                                 </div>
                                                 <span
-                                                    class="ms-3 text-sm font-medium
-                                                    text-gray-900">{{ $category->status == 1 ?
+                                                    class="ms-3 text-sm font-medium text-gray-900">{{ $quiz->status == 1 ?
                                                     'Active' : 'Inactive' }}</span>
                                             </label>
                                             <input type="hidden" name="id"
-                                                   value="{{ $category->id }}">
+                                                   value="{{ $quiz->id }}">
                                         </form>
-
                                     </td>
                                     <td class="px-6 py-2 flex justify-center gap-3">
-                                        <a href="{{ route('edit-category', $category->id) }}"
+                                        <a href="#"
                                            class="bg-green-500 px-5 py-2 rounded-lg
-                                           font-medium
-                                   text-white hover:bg-green-700"
+                                           font-medium text-white hover:bg-green-700"
                                            data-modal-target="editCategory-modal"
                                            data-modal-toggle="editCategory-modal">Edit
                                         </a>
-                                        <a href="{{ route('delete-category', ['id' => $category['id']]) }}"
+                                        <a href="{{ route('delete-category', ['id' => $quiz['id']]) }}"
                                            class="bg-red-700 px-5 py-2 rounded-lg font-medium text-white
                                    hover:bg-red-800">Delete</a>
+                                        <a href="#"
+                                           class="bg-blue-700 px-5 py-2 rounded-lg font-medium
+                                           text-white
+                                   hover:bg-blue-800">Add Question</a>
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="px-6 py-2 text-center bg-white">No
+                                    <td colspan="6" class="px-6 py-2 text-center bg-white">No
                                         data found.
                                     </td>
                                 </tr>
@@ -133,8 +146,8 @@
 
                     {{-- Pagination --}}
                     <div class="pl-1 mt-7 text-right flex items-center justify-between gap-10">
-                        @if ($categories->hasPages())
-                            {{ $categories->links() }}
+                        @if ($quizzes->hasPages())
+                            {{ $quizzes->links() }}
                         @else
                             <nav class="flex items-center justify-between">
                                 <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium
@@ -165,7 +178,7 @@
                     <div
                         class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                            Add new category
+                            Add new quiz
                         </h3>
                         <button type="button"
                                 class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200
@@ -184,19 +197,71 @@
 
                     <!-- Modal body (add) -->
                     <div class="p-4 md:p-5">
-                        <form method="POST" action="{{ route('add-category') }}" class="flex
-                        flex-col gap-2">
+                        <form method="POST" action="{{ route('add-quiz') }}" class="flex flex-col
+                         gap-2">
                             @csrf
                             <div class="mb-5">
-                                <label for="name"
+                                <label for="title"
                                        class="block mb-2 text-sm font-medium text-gray-900">
-                                    Category Name
+                                    Title
                                 </label>
-                                <input type="text" id="name" name="name"
+                                <input type="text" id="title" name="title"
                                        class="bg-gray-50 border border-gray-300 text-gray-900
                                        text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                       placeholder="Category" required/>
-                                <x-input-error :messages="$errors->get('name')"
+                                       placeholder="Title" required/>
+                                <x-input-error :messages="$errors->get('title')"
+                                               class="mt-2"/>
+                            </div>
+                            <div class="mb-5">
+                                <label for="exam_date"
+                                       class="block mb-2 text-sm font-medium text-gray-900">
+                                    Date
+                                </label>
+                                <div class="relative max-w-sm">
+                                    {{--<div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3.5 pointer-events-none">
+                                        <svg class="size-4 text-gray-500"
+                                             aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                             fill="currentColor" viewBox="0 0 20 20">
+                                            <path
+                                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                        </svg>
+                                    </div>--}}
+                                    <input type="date" required name="exam_date" class="bg-gray-50 border border-gray-300 text-gray-900
+                                            text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+
+                                </div>
+                                <x-input-error :messages="$errors->get('exam_date')"
+                                               class="mt-2"/>
+                            </div>
+                            <div class="mb-5">
+                                <label for="exam_duration"
+                                       class="block mb-2 text-sm font-medium text-gray-900">
+                                    Duration (in minutes)
+                                </label>
+                                <input type="number" id="exam_duration" name="exam_duration"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900
+                                       text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                       placeholder="Duration (at least 10 minutes)" required/>
+                                <x-input-error :messages="$errors->get('exam_duration')"
+                                               class="mt-2"/>
+                            </div>
+                            <div class="mb-5">
+                                <label for="category"
+                                       class="block mb-2 text-sm font-medium text-gray-900">
+                                    Select Category
+                                </label>
+                                <select id="category" name="category"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900
+                                        text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                                    <option selected>Choose a category</option>
+                                    @foreach ($categories as $category)
+                                        <option
+                                            value="{{ $category['id']}}">{{ $category['name']}}</option>
+                                    @endforeach
+                                </select>
+
+                                <x-input-error :messages="$errors->get('category')"
                                                class="mt-2"/>
                             </div>
                             <button type="submit"
@@ -212,7 +277,7 @@
         </div>
 
         {{-- Edit: Modal --}}
-        <div id="editCategory-modal" tabindex="-1" aria-hidden="true"
+        {{--<div id="editCategory-modal" tabindex="-1" aria-hidden="true"
              class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50
              justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
             <div class="relative p-4 w-full max-w-md max-h-full">
@@ -265,7 +330,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div>--}}
 
     </main>
 

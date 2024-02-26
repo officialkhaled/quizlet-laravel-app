@@ -15,7 +15,12 @@ class Quiz extends Model
         'title',
         'category',
         'exam_date',
-        'status',
-        'exam_duration'
+        'exam_duration',
+        'status'
     ];
+
+    public function category()
+    {
+        //
+    }
 }
