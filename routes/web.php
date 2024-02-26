@@ -24,6 +24,7 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/view-quiz', [AdminController::class, 'view_quiz'])->name('view-quiz');
+    Route::get('/admin/category', [AdminController::class, 'category'])->name('category');
 
     Route::get('/admin/create-quiz', [AdminController::class, 'create_quiz'])->name('create-quiz');
     Route::get('/admin/store-quiz', [AdminController::class, 'storeQuestion'])->name('store-quiz');

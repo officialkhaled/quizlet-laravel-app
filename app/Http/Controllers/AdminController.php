@@ -25,6 +25,13 @@ class AdminController extends Controller
         return view('admin.partials.view-quiz');
     }
 
+    public function category()
+    {
+//        $questions = Question::all();
+
+        return view('admin.partials.category');
+    }
+
     public function create_quiz()
     {
         return view('admin.partials.create-quiz');
