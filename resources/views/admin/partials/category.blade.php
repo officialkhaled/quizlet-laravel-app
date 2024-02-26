@@ -4,7 +4,7 @@
     <main>
         <div class="p-2 sm:ml-64">
             <div class="bg-gray-200 m-8 rounded-lg">
-                <div class="pt-8 rounded-lg flex items-center justify-between">
+                <div class="px-1 pt-4 rounded-lg flex items-center justify-between">
                     <ol class="flex items-center w-full p-3 space-x-2 text-sm font-medium
                     text-center text-gray-500 border border-gray-200 rounded-lg sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse">
                         <li class="flex items-center text-blue-600">
