@@ -24,12 +24,26 @@ Route::middleware(['auth'])->group(function () {
 Route::middleware(['auth', 'admin'])->group(function () {
     Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
     Route::get('/admin/view-quiz', [AdminController::class, 'view_quiz'])->name('view-quiz');
-    Route::get('/admin/category', [AdminController::class, 'category'])->name('category');
 
+    /* Category */
+    Route::get('/admin/category', [AdminController::class, 'category'])->name('category');
+    Route::post('/admin/add-new-category', [AdminController::class, 'store'])->name('add-category');
+    Route::get('/admin/delete-category/{id}', [AdminController::class, 'destroy'])->name('delete-category');
+    Route::patch('/admin/update-status/{id}', [AdminController::class, 'update_status'])->name('update-status');
+//    Route::post('/admin/edit-new-category', [AdminController::class, 'edit_new_category'])->name('category');
+//    Route::get('/admin/edit-category/{id}', [AdminController::class, 'update'])->name('edit-category');
+
+    Route::get('/admin/{category}/edit', [AdminController::class, 'edit'])->name('edit-category');
+    Route::post('/admin/{category}', [AdminController::class, 'update'])->name('update-category');
+
+
+    /*  */
     Route::get('/admin/create-quiz', [AdminController::class, 'create_quiz'])->name('create-quiz');
     Route::get('/admin/store-quiz', [AdminController::class, 'storeQuestion'])->name('store-quiz');
 });
 
+
+/* Profile */
 Route::middleware(['auth'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
