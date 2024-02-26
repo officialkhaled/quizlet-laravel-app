@@ -41,8 +41,8 @@
                              stroke-miterlimit="2" viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
-                                    d="m12.002 2c5.518 0 9.998 4.48 9.998 9.998 0 5.517-4.48 9.997-9.998 9.997-5.517 0-9.997-4.48-9.997-9.997 0-5.518 4.48-9.998 9.997-9.998zm-.747 9.25h-3.5c-.414 0-.75.336-.75.75s.336.75.75.75h3.5v3.5c0 .414.336.75.75.75s.75-.336.75-.75v-3.5h3.5c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-3.5v-3.5c0-.414-.336-.75-.75-.75s-.75.336-.75.75z"
-                                    fill-rule="nonzero"/>
+                                d="m12.002 2c5.518 0 9.998 4.48 9.998 9.998 0 5.517-4.48 9.997-9.998 9.997-5.517 0-9.997-4.48-9.997-9.997 0-5.518 4.48-9.998 9.997-9.998zm-.747 9.25h-3.5c-.414 0-.75.336-.75.75s.336.75.75.75h3.5v3.5c0 .414.336.75.75.75s.75-.336.75-.75v-3.5h3.5c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-3.5v-3.5c0-.414-.336-.75-.75-.75s-.75.336-.75.75z"
+                                fill-rule="nonzero"/>
                         </svg>
                     </button>
                 </div>
@@ -88,7 +88,7 @@
                                                 <input type="checkbox" value="" class="sr-only peer"
                                                        onchange="this.form.submit()" {{ $category->status == 1 ? 'checked' : '' }}>
                                                 <div
-                                                        class="relative w-9 h-5 bg-gray-200
+                                                    class="relative w-9 h-5 bg-gray-200
                                         peer-focus:outline-none rounded-full peer
                                         peer-checked:after:translate-x-full
                                         rtl:peer-checked:after:-translate-x-full
@@ -98,7 +98,7 @@
                                         after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600">
                                                 </div>
                                                 <span
-                                                        class="ms-3 text-sm font-medium text-gray-900">Active</span>
+                                                    class="ms-3 text-sm font-medium text-gray-900">Active</span>
                                             </label>
                                             <input type="hidden" name="id"
                                                    value="{{ $category->id }}">
@@ -131,7 +131,23 @@
 
                     {{-- Pagination --}}
                     <div class="pl-1 mt-7 text-right flex items-center justify-between gap-10">
-                        {{ $categories->links() }}
+                        @if ($categories->hasPages())
+                            {{ $categories->links() }}
+                        @else
+                            <nav class="flex items-center justify-between">
+                                <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium
+                                text-gray-500 bg-white border border-gray-300 cursor-default disabled:
+                                leading-5 rounded-md">
+                                    Previous
+                                </span>
+                                <span
+                                    class="relative inline-flex items-center px-4 py-2 ml-3
+                                    text-sm font-medium text-gray-500 bg-white border
+                                    border-gray-300 cursor-default disabled: leading-5 rounded-md">
+                                    Next
+                                </span>
+                            </nav>
+                        @endif
                     </div>
 
                 </div>
@@ -145,7 +161,7 @@
             <div class="relative p-4 w-full max-w-md max-h-full">
                 <div class="relative bg-white rounded-lg shadow">
                     <div
-                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                             Add new category
                         </h3>
@@ -200,7 +216,7 @@
             <div class="relative p-4 w-full max-w-md max-h-full">
                 <div class="relative bg-white rounded-lg shadow">
                     <div
-                            class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
+                        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
                         <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
                             Edit category
                         </h3>

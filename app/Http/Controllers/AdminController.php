@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Quiz;
 use App\Models\User;
 use App\Models\Question;
 use Illuminate\Http\Request;
@@ -17,7 +18,20 @@ class AdminController extends Controller
         $id = Auth::user()->id;
         $adminData = User::find($id);
 
-        return view('admin.partials.dashboard', compact('adminData'));
+        $admin_count = User::where('usertype', 0)->count();
+        $user_count = User::where('usertype', 1)->count();
+        $category_count = Category::get()->count();
+        $quiz_count = Quiz::get()->count();
+        $question_count = Question::get()->count();
+
+        return view('admin.partials.dashboard',
+            [
+                'user' => $user_count,
+                'quiz' => $quiz_count,
+                'admin' => $admin_count,
+                'category' => $category_count,
+                'question' => $question_count
+            ], compact('adminData'));
     }
 
     public function category()

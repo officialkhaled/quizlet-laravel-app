@@ -22,14 +22,14 @@ Route::middleware(['auth'])->group(function () {
 
 /* Admin Routes */
 Route::middleware(['auth', 'admin'])->group(function () {
-    Route::get('/admin/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
-    Route::get('/admin/view-quiz', [AdminController::class, 'view_quiz'])->name('view-quiz');
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+    Route::get('/view-quiz', [AdminController::class, 'view_quiz'])->name('view-quiz');
 
     /* Category */
-    Route::get('/admin/category', [AdminController::class, 'category'])->name('category');
-    Route::post('/admin/add-new-category', [AdminController::class, 'store'])->name('add-category');
-    Route::get('/admin/delete-category/{id}', [AdminController::class, 'destroy'])->name('delete-category');
-    Route::patch('/admin/update-status/{id}', [AdminController::class, 'update_status'])->name('update-status');
+    Route::get('/category', [AdminController::class, 'category'])->name('category');
+    Route::post('/add-new-category', [AdminController::class, 'store'])->name('add-category');
+    Route::get('/delete-category/{id}', [AdminController::class, 'destroy'])->name('delete-category');
+    Route::patch('/update-status/{id}', [AdminController::class, 'update_status'])->name('update-status');
 //    Route::post('/admin/edit-new-category', [AdminController::class, 'edit_new_category'])->name('category');
 //    Route::get('/admin/edit-category/{id}', [AdminController::class, 'update'])->name('edit-category');
 
