@@ -78,9 +78,9 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('manage-quiz') }}"
+                    <a href="{{ route('view-quiz') }}"
                        class="flex items-center p-2 rounded-lg group {{ request()->routeIs
-                       ('manage-quiz') ?
+                       ('view-quiz') ?
                     'bg-gray-200 text-gray-900' : 'text-gray-900 hover:bg-gray-100' }}">
                         <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75
                         group-hover:text-gray-900" fill="currentColor" width="24" height="24"

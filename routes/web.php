@@ -30,18 +30,11 @@ Route::middleware(['auth', 'admin'])->group(function () {
     Route::post('/add-new-category', [AdminController::class, 'store'])->name('add-category');
     Route::get('/delete-category/{id}', [AdminController::class, 'destroy'])->name('delete-category');
     Route::patch('/update-status/{id}', [AdminController::class, 'update_status'])->name('update-status');
-//    Route::post('/edit-new-category', [AdminController::class, 'edit_new_category'])->name('category');
-//    Route::get('/edit-category/{id}', [AdminController::class, 'update'])->name('edit-category');
-    Route::get('/{category}/edit', [AdminController::class, 'edit'])->name('edit-category');
-    Route::post('/{category}', [AdminController::class, 'update'])->name('update-category');
+//    Route::post('/admin/edit-new-category', [AdminController::class, 'edit_new_category'])->name('category');
+//    Route::get('/admin/edit-category/{id}', [AdminController::class, 'update'])->name('edit-category');
 
-    /* Manage Quiz */
-    Route::get('/manage-quiz', [AdminController::class, 'manage_quiz'])->name('manage-quiz');
-    Route::post('/add-new-quiz', [AdminController::class, 'add_quiz'])->name('add-quiz');
-    Route::get('/quiz-status/{id}', [AdminController::class, 'quiz_status'])->name('quiz-status');
-    Route::get('/delete-quiz/{id}', [AdminController::class, 'delete_quiz'])->name('delete-quiz');
-
-//    Route::get('/edit-quiz/{id}', [AdminController::class, 'edit_quiz'])->name('edit-quiz');
+    Route::get('/admin/{category}/edit', [AdminController::class, 'edit'])->name('edit-category');
+    Route::post('/admin/{category}', [AdminController::class, 'update'])->name('update-category');
 
 
     /*  */

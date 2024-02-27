@@ -98,9 +98,7 @@
                                         after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600">
                                                 </div>
                                                 <span
-                                                    class="ms-3 text-sm font-medium
-                                                    text-gray-900">{{ $category->status == 1 ?
-                                                    'Active' : 'Inactive' }}</span>
+                                                    class="ms-3 text-sm font-medium text-gray-900">Active</span>
                                             </label>
                                             <input type="hidden" name="id"
                                                    value="{{ $category->id }}">
@@ -114,9 +112,9 @@
                                    text-white hover:bg-green-700"
                                            data-modal-target="editCategory-modal"
                                            data-modal-toggle="editCategory-modal">Edit
-                                        </a>
-                                        <a href="{{ route('delete-category', ['id' => $category['id']]) }}"
-                                           class="bg-red-700 px-5 py-2 rounded-lg font-medium text-white
+                                            </button>
+                                            <a href="{{ route('delete-category', ['id' => $category['id']]) }}"
+                                               class="bg-red-700 px-5 py-2 rounded-lg font-medium text-white
                                    hover:bg-red-800">Delete</a>
                                     </td>
                                 </tr>
