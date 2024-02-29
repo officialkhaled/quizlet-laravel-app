@@ -98,7 +98,9 @@
                                         after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600">
                                                 </div>
                                                 <span
-                                                    class="ms-3 text-sm font-medium text-gray-900">Active</span>
+                                                    class="ms-3 text-sm font-medium
+                                                    text-gray-900 min-w-14">{{ $category->status == 1 ?
+                                                    'Active' : 'Inactive' }}</span>
                                             </label>
                                             <input type="hidden" name="id"
                                                    value="{{ $category->id }}">
@@ -112,42 +114,42 @@
                                    text-white hover:bg-green-700"
                                            data-modal-target="editCategory-modal"
                                            data-modal-toggle="editCategory-modal">Edit
-                                            </button>
-                                            <a href="{{ route('delete-category', ['id' => $category['id']]) }}"
-                                               class="bg-red-700 px-5 py-2 rounded-lg font-medium text-white
+                                        </a>
+                                        <a href="{{ route('delete-category', ['id' => $category['id']]) }}"
+                                           class="bg-red-700 px-5 py-2 rounded-lg font-medium text-white
                                    hover:bg-red-800">Delete</a>
+
+
+                                        <input type="button" name="showDiv" onclick="showDiv()"
+                                               class="bg-sky-500 px-5 py-2 rounded-lg font-medium text-white hover:bg-sky-800"
+                                               value="Show Div"></input>
+
+
                                     </td>
                                 </tr>
                             @empty
                                 <tr>
-                                    <td colspan="4" class="px-6 py-2 text-center bg-white">No
-                                        data found.
+                                    <td colspan="4" class="px-6 py-2 text-center bg-white">
+                                        No data found.
                                     </td>
                                 </tr>
                             @endforelse
                             </tbody>
                         </table>
+
+
+                        <div class="bg-lime-400 text-center p-8 hidden" id="hiddenDiv">
+                            <p class="text-4xl text-lime-800">
+                                SUCCESS
+                            </p>
+                        </div>
+
+
                     </div>
 
                     {{-- Pagination --}}
-                    <div class="pl-1 mt-7 text-right flex items-center justify-between gap-10">
-                        @if ($categories->hasPages())
-                            {{ $categories->links() }}
-                        @else
-                            <nav class="flex items-center justify-between">
-                                <span class="relative inline-flex items-center px-4 py-2 text-sm font-medium
-                                text-gray-500 bg-white border border-gray-300 cursor-default disabled:
-                                leading-5 rounded-md">
-                                    Previous
-                                </span>
-                                <span
-                                    class="relative inline-flex items-center px-4 py-2 ml-3
-                                    text-sm font-medium text-gray-500 bg-white border
-                                    border-gray-300 cursor-default disabled: leading-5 rounded-md">
-                                    Next
-                                </span>
-                            </nav>
-                        @endif
+                    <div class="pl-1 mt-7 text-right">
+                        {{ $categories->links() }}
                     </div>
 
                 </div>
@@ -209,62 +211,15 @@
             </div>
         </div>
 
-        {{-- Edit: Modal --}}
-        <div id="editCategory-modal" tabindex="-1" aria-hidden="true"
-             class="hidden overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50
-             justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full">
-            <div class="relative p-4 w-full max-w-md max-h-full">
-                <div class="relative bg-white rounded-lg shadow">
-                    <div
-                        class="flex items-center justify-between p-4 md:p-5 border-b rounded-t">
-                        <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
-                            Edit category
-                        </h3>
-                        <button type="button"
-                                class="end-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ms-auto inline-flex justify-center items-center"
-                                data-modal-hide="editCategory-modal">
-                            <svg class="w-3 h-3" aria-hidden="true"
-                                 xmlns="http://www.w3.org/2000/svg"
-                                 fill="none" viewBox="0 0 14 14">
-                                <path stroke="currentColor" stroke-linecap="round"
-                                      stroke-linejoin="round" stroke-width="2"
-                                      d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-                            </svg>
-                            <span class="sr-only">Close modal</span>
-                        </button>
-                    </div>
-
-                    <!-- Modal body (edit) -->
-                    <div class="p-4 md:p-5">
-                        <form method="POST" action="{{ route('update-category', $category->id) }}"
-                              class="flex flex-col gap-2">
-                            @csrf
-                            @method('POST')
-                            <div class="mb-5">
-                                <label for="username"
-                                       class="block mb-2 text-sm font-medium text-gray-900">
-                                    Category Name
-                                </label>
-                                <input type="text" id="category_name" name="category_name"
-                                       value="{{ $category->name }}"
-                                       class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-                   focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                       placeholder="Category" required/>
-                                <x-input-error :messages="$errors->get('category_name')"
-                                               class="mt-2"/>
-                            </div>
-                            <button type="submit"
-                                    class="ml-auto text-white bg-blue-700 hover:bg-blue-800
-                                    focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5
-                                     text-center">
-                                Update
-                            </button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-
     </main>
+
+
+    <script>
+
+        function showDiv() {
+            document.getElementById('hiddenDiv').style.display = "block";
+        }
+
+    </script>
 
 @endsection

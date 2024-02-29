@@ -11,13 +11,13 @@
                 <div class="flex items-center space-x-2 rtl:space-x-reverse">
 
                     <a href="{{ route('login') }}"
-                       class="text-sm text-white font-bold uppercase bg-blue-700 px-4 py-2
-                       rounded-lg hover:bg-blue-800">Login</a>
+                       class="text-sm text-black font-bold uppercase bg-gray-100 hover:bg-gray-300
+                       px-4 py-2 rounded-lg">Login</a>
                     <a href="{{ route('register') }}"
-                       class="text-sm text-black font-bold uppercase border border-gray-500
-                       hover:bg-gray-500 px-4 py-2
-                       rounded-lg hover:text-white">Register</a>
+                       class="text-sm text-white font-bold uppercase bg-blue-700 px-4 py-2
+                       rounded-lg hover:bg-blue-800">Register</a>
 
+                    {{-- Logout button --}}
                     {{--@auth
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
