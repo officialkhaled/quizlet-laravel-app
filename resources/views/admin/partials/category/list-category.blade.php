@@ -110,10 +110,7 @@
                                     <td class="px-6 py-2 flex justify-center gap-3">
                                         <a href="{{ route('edit-category', $category->id) }}"
                                            class="bg-green-500 px-5 py-2 rounded-lg
-                                           font-medium
-                                   text-white hover:bg-green-700"
-                                           data-modal-target="editCategory-modal"
-                                           data-modal-toggle="editCategory-modal">Edit
+                                           font-medium text-white hover:bg-green-700">Edit
                                         </a>
                                         <a href="{{ route('delete-category', ['id' => $category['id']]) }}"
                                            class="bg-red-700 px-5 py-2 rounded-lg font-medium text-white

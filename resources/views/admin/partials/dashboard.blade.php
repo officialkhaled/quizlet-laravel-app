@@ -14,9 +14,9 @@
 
             <div class="px-40 py-8 flex flex-wrap gap-10 justify-center">
 
-                <div class="max-w-sm w-96 p-8 bg-white border border-gray-200 rounded-lg shadow">
+                <div class="max-w-sm w-72 p-4 bg-white border border-gray-200 rounded-lg shadow">
                     <div class="p-2 flex justify-between items-center">
-                        <h5 class=" text-2xl font-bold tracking-tight text-gray-900">Total
+                        <h5 class=" text-xl font-bold tracking-tight text-gray-900">Total
                             Admins</h5>
                         <img src="{{ asset('asset/img/dashboard/admin.gif') }}" alt=""
                              class="size-24">
@@ -30,9 +30,9 @@
                     </div>
                 </div>
 
-                <div class="max-w-sm w-96 p-8 bg-white border border-gray-200 rounded-lg shadow">
+                <div class="max-w-sm w-72 p-4 bg-white border border-gray-200 rounded-lg shadow">
                     <div class="p-2 flex justify-between items-center">
-                        <h5 class=" text-2xl font-bold tracking-tight text-gray-900">Total
+                        <h5 class=" text-xl font-bold tracking-tight text-gray-900">Total
                             Students</h5>
                         <img src="{{ asset('asset/img/dashboard/students.gif') }}" alt=""
                              class="size-24">
@@ -46,9 +46,9 @@
                     </div>
                 </div>
 
-                <div class="max-w-sm w-96 p-8 bg-white border border-gray-200 rounded-lg shadow">
+                <div class="max-w-sm w-72 p-4 bg-white border border-gray-200 rounded-lg shadow">
                     <div class="p-2 flex justify-between items-center">
-                        <h5 class=" text-2xl font-bold tracking-tight text-gray-900">Categories</h5>
+                        <h5 class=" text-xl font-bold tracking-tight text-gray-900">Categories</h5>
                         <img src="{{ asset('asset/img/dashboard/category.gif') }}" alt=""
                              class="size-24">
                     </div>
@@ -61,9 +61,9 @@
                     </div>
                 </div>
 
-                <div class="max-w-sm w-96 p-8 bg-white border border-gray-200 rounded-lg shadow">
+                <div class="max-w-sm w-72 p-4 bg-white border border-gray-200 rounded-lg shadow">
                     <div class="p-2 flex justify-between items-center">
-                        <h5 class=" text-2xl font-bold tracking-tight text-gray-900">Quizzes</h5>
+                        <h5 class=" text-xl font-bold tracking-tight text-gray-900">Quizzes</h5>
                         <img src="{{ asset('asset/img/dashboard/quiz.gif') }}" alt=""
                              class="size-24">
                     </div>
@@ -76,9 +76,9 @@
                     </div>
                 </div>
 
-                <div class="max-w-sm w-96 p-8 bg-white border border-gray-200 rounded-lg shadow">
+                <div class="max-w-sm w-72 p-4 bg-white border border-gray-200 rounded-lg shadow">
                     <div class="p-2 flex justify-between items-center">
-                        <h5 class=" text-2xl font-bold tracking-tight text-gray-900">Total
+                        <h5 class=" text-xl font-bold tracking-tight text-gray-900">Total
                             Questions</h5>
                         <img src="{{ asset('asset/img/dashboard/question.gif') }}" alt=""
                              class="size-24">
@@ -92,9 +92,9 @@
                     </div>
                 </div>
 
-                <div class="max-w-sm w-96 p-8 bg-white border border-gray-200 rounded-lg shadow">
+                <div class="max-w-sm w-72 p-4 bg-white border border-gray-200 rounded-lg shadow">
                     <div class="p-2 flex justify-between items-center">
-                        <h5 class=" text-2xl font-bold tracking-tight text-gray-900">Unique
+                        <h5 class=" text-xl font-bold tracking-tight text-gray-900">Unique
                             Visitors</h5>
                         <img src="{{ asset('asset/img/dashboard/visitors.gif') }}" alt=""
                              class="size-24">

@@ -6,10 +6,12 @@ use App\Models\Category;
 use App\Models\Quiz;
 use App\Models\User;
 use App\Models\Question;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class AdminController extends Controller
 {
@@ -38,7 +40,7 @@ class AdminController extends Controller
     {
         $categories = Category::paginate(10);
 
-        return view('admin.partials.category', ['categories' => $categories]);
+        return view('admin.partials.category.list-category', ['categories' => $categories]);
     }
 
     public function store(Request $request, Category $category)
@@ -74,40 +76,26 @@ class AdminController extends Controller
         return back()->with('success', 'Category status updated successfully.');
     }
 
-    public function edit(Category $category)
+    public function edit($id)
     {
-        return view('edit-category', compact('category'));
+        $category = Category::where('id', $id)->get()->first();
+        return view('admin.partials.category.edit-category', ['category' => $category]);
     }
+
 
     public function update(Request $request, Category $category)
     {
-        $validated = $request->validate([
-            'category_name' => 'required|string',
+
+        $validatedData = $request->validate([
+            'name' => 'required|string',
         ]);
 
         $category->update([
-            'name' => $validated['category_name'],
+            'name' => $validatedData['name'],
         ]);
 
-        return redirect()->route('some.route')->with('success', 'Category updated successfully.');
+        return redirect()->route('category')->with('success', 'Category updated successfully.');
     }
-
-    //Editing the categories
-    public function edit_category($id)
-    {
-        $category = Category::where('id', $id)->get()->first();
-        return view('admin.category', ['category' => $category]);
-    }
-
-    //Editing the categories
-    public function Editing(Request $request, Category $category)
-    {
-        $cat = Category::where('id', $request->id)->get()->first();
-        $cat->name = $request->name;
-        $cat->update();
-        echo json_encode(array('status' => 'true', 'message' => 'updated successfully', 'reload' => route('category')));
-    }
-
 
     public function view_quiz()
     {
