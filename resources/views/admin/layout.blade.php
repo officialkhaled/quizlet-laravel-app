@@ -19,10 +19,24 @@
     @yield('content')
 </div>
 
+@include('components.common.loader')
+
 @include('components.common.footer')
 
 @include('components.common.scripts')
-</body>
 
+<script>
+    /* Loader */
+    window.addEventListener('beforeunload', function (e) {
+        document.getElementById('loadingScreen').style.display = 'flex';
+    });
+
+    window.addEventListener('load', function (e) {
+        document.getElementById('loadingOverlay').style.display = 'none';
+    });
+
+</script>
+
+</body>
 </html>
 

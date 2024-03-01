@@ -4,8 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration
-{
+return new class extends Migration {
     /**
      * Run the migrations.
      */
@@ -14,8 +13,8 @@ return new class extends Migration
         Schema::create('results', function (Blueprint $table) {
             $table->id();
 
-            $table->string('exam_id');
-            $table->string('user_id');
+            $table->integer('quiz_id');
+            $table->integer('user_id');
             $table->string('yes_ans');
             $table->string('no_ans');
             $table->string('result_json');

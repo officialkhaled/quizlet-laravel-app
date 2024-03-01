@@ -13,10 +13,9 @@ return new class extends Migration {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
 
-            $table->string('exam_id')->nullable();
-            $table->string('questions')->nullable();
-            $table->string('ans')->nullable();
-            $table->string('options')->nullable();
+            $table->foreignId('quiz_id')->constrained()->onDelete('cascade');
+            $table->string('question_text')->nullable();
+            $table->enum('answer_type', ['single', 'multiple'])->comment('single or multiple'); //
             $table->string('status')->nullable();
 
             $table->timestamps();

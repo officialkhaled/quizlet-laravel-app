@@ -12,10 +12,17 @@ class Question extends Model
     protected $table = 'questions';
 
     protected $fillable = [
-        'exam_id',
-        'questions',
-        'ans',
-        'options',
+        'quiz_id',
+        'question_text',
+        'answer_type',
         'status'
     ];
+
+    public function quiz() {
+        return $this->belongsTo(Quiz::class, 'quiz_id');
+    }
+
+    public function options() {
+        return $this->hasMany(Option::class, 'option_id');
+    }
 }

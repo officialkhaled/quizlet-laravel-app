@@ -13,8 +13,8 @@ return new class extends Migration {
         Schema::create('user_quizzes', function (Blueprint $table) {
             $table->id();
 
-            $table->string('user_id');
-            $table->string('exam_id');
+            $table->integer('user_id');
+            $table->integer('quiz_id');
             $table->string('std_status');
             $table->string('exam_joined');
 
