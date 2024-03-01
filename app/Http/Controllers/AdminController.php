@@ -100,7 +100,7 @@ class AdminController extends Controller
     /* Quiz */
     public function quiz()
     {
-        $categories = Category::where('status', '1')->get()->toArray();
+        $categories = Category::where('status', '1')->get();
         $quizzes = Quiz::select(['quizzes.*', 'categories.name as category_name'])
             ->join('categories', 'quizzes.category_id', '=', 'categories.id')
             ->paginate(10);
