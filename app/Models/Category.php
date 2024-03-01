@@ -13,6 +13,13 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'status'
+        'status',
+        'quiz_id'
     ];
+
+    public function quiz()
+    {
+        return $this->hasMany(Quiz::class, 'quiz_id')->withDefault();
+    }
+
 }

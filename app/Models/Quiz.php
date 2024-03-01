@@ -13,9 +13,24 @@ class Quiz extends Model
 
     protected $fillable = [
         'title',
-        'category',
-        'exam_date',
-        'status',
-        'exam_duration'
+        'category_id',
+        'quiz_date',
+        'quiz_duration',
+        'status'
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class, 'category_id')->withDefault();
+    }
+
+    public function questions()
+    {
+        return $this->hasMany(Question::class, 'question_id')->withDefault();
+    }
+
+    public function attempts()
+    {
+        return $this->hasMany(QuizAttempt::class, 'quiz_attempt_id')->withDefault();
+    }
 }

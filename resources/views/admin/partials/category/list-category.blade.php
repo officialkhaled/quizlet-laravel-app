@@ -2,6 +2,7 @@
 @section('content')
 
     <main>
+
         <div class="p-2 sm:ml-64">
             <div class="bg-gray-200 m-8 rounded-lg">
                 <div class="px-1 pt-4 rounded-lg flex items-center justify-between">
@@ -200,7 +201,7 @@
                                     class="ml-auto text-white bg-blue-700 hover:bg-blue-800
                                     focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5
                                      text-center">
-                                Save
+                                Create
                             </button>
                         </form>
                     </div>
@@ -209,7 +210,6 @@
         </div>
 
     </main>
-
 
     <script>
 
