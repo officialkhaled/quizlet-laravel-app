@@ -4,7 +4,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\QuizController;
+use App\Http\Controllers\QuestionController;
 
 Route::get('/', function () {
     if (Auth::check()) {
@@ -30,21 +33,35 @@ Route::middleware(['auth'])->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
         Route::get('/view-quiz', [AdminController::class, 'view_quiz'])->name('view-quiz');
 
-        /* Category */
-        Route::get('/category', [AdminController::class, 'category'])->name('category');
-        Route::post('/add-new-category', [AdminController::class, 'store'])->name('add-category');
-        Route::get('/delete-category/{id}', [AdminController::class, 'destroy'])->name('delete-category');
-        Route::patch('/update-status/{id}', [AdminController::class, 'updateStatus'])->name('update-status');
-        Route::get('/edit-category/{category}', [AdminController::class, 'edit'])->name('edit-category');
-        Route::post('/{category}', [AdminController::class, 'update'])->name('update-category');
+        Route::group(['prefix' => 'category', 'as' => 'category.'], function () {
+            /* Category */
+            Route::get('/', [CategoryController::class, 'index'])->name('index');
+            Route::post('/create', [CategoryController::class, 'store'])->name('store');
+            Route::get('/delete/{id}', [CategoryController::class, 'destroy'])->name('delete');
+            Route::patch('/update-status/{id}', [CategoryController::class, 'updateStatus'])->name('update-status');
+            Route::get('/edit-category/{category}', [CategoryController::class, 'edit'])->name('edit');
+            Route::post('/{category}', [CategoryController::class, 'update'])->name('update');
+        });
 
-        /* Quiz */
-        Route::get('/quiz', [AdminController::class, 'quiz'])->name('quiz');
-        Route::post('/add-new-quiz', [AdminController::class, 'storeQuiz'])->name('add-quiz');
-        Route::get('/delete-quiz/{id}', [AdminController::class, 'deleteQuiz'])->name('delete-quiz');
-        Route::get('/quiz-status/{id}', [AdminController::class, 'updateQuizStatus'])->name('update-quiz-status');
-        Route::get('/edit-quiz/{quiz}', [AdminController::class, 'editQuiz'])->name('edit-quiz');
-        Route::post('/{quiz}', [AdminController::class, 'updateQuiz'])->name('update-quiz');
+        Route::group(['prefix' => 'quiz', 'as' => 'quiz.'], function () {
+            /* Quiz */
+            Route::get('/', [QuizController::class, 'index'])->name('index');
+            Route::post('/create', [QuizController::class, 'store'])->name('store');
+            Route::get('/delete/{id}', [QuizController::class, 'destroy'])->name('delete');
+            Route::patch('/update-status/{id}', [QuizController::class, 'updateStatus'])->name('update-status');
+            Route::get('/edit/{quiz}', [QuizController::class, 'edit'])->name('edit');
+            Route::post('/{quiz}', [QuizController::class, 'update'])->name('update');
+        });
+
+        Route::group(['prefix' => 'question', 'as' => 'question.'], function () {
+            /* Quiz */
+            Route::get('/', [QuestionController::class, 'index'])->name('index');
+            Route::post('/create', [QuestionController::class, 'store'])->name('store');
+            Route::get('/delete/{id}', [QuestionController::class, 'destroy'])->name('delete');
+            Route::patch('/update-status/{id}', [QuestionController::class, 'updateStatus'])->name('update-status');
+            Route::get('/edit/{quiz}', [QuestionController::class, 'edit'])->name('edit');
+            Route::post('/{quiz}', [QuestionController::class, 'update'])->name('update');
+        });
 
         /* Profile */
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

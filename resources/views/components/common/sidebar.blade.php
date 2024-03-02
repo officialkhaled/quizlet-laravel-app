@@ -61,9 +61,9 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('category') }}"
+                    <a href="{{ route('category.index') }}"
                        class="flex items-center p-2 rounded-lg group {{ request()->routeIs
-                       ('category') ?
+                       ('category.index') ?
                     'bg-gray-200 text-gray-900' : 'text-gray-900 hover:bg-gray-100' }}">
                         <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75
                         group-hover:text-gray-900" fill="currentColor" clip-rule="evenodd"
@@ -79,8 +79,8 @@
                 </li>
 
                 <li>
-                    <a href="{{ route('quiz') }}"
-                       class="flex items-center p-2 rounded-lg group {{ request()->routeIs('quiz') ?
+                    <a href="{{ route('quiz.index') }}"
+                       class="flex items-center p-2 rounded-lg group {{ request()->routeIs('quiz.index') ?
                     'bg-gray-200 text-gray-900' : 'text-gray-900 hover:bg-gray-100' }}">
                         <svg class="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75
                         group-hover:text-gray-900" fill="currentColor" width="24" height="24"

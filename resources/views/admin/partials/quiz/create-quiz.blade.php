@@ -4,7 +4,7 @@
     <main>
         <div class="py-2 px-10 sm:ml-64">
             <div class="p-8 mt-10 rounded-lg">
-                <form action="{{ route('store-quiz') }}" method="POST"
+                <form action="{{ '' }}" method="POST"
                       class="max-w-screen-lg mx-auto">
                     @csrf
                     <div class="border-2 rounded-lg border-blue-200 p-6 mb-4">
