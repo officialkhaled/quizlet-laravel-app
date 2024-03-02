@@ -8,7 +8,7 @@
                     <ol class="flex items-center w-full p-3 space-x-2 text-sm font-medium
                     text-center text-gray-500 border border-gray-200 rounded-lg sm:text-base sm:p-4 sm:space-x-4 rtl:space-x-reverse">
                         <li class="flex items-center">
-                            Category
+                            Manage Quiz
                             <svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 10">
                                 <path stroke="currentColor" stroke-linecap="round"
@@ -17,7 +17,7 @@
                             </svg>
                         </li>
                         <li class="flex items-center">
-                            Category List
+                            Quiz List
                             <svg class="w-3 h-3 ms-2 sm:ms-4 rtl:rotate-180" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 12 10">
                                 <path stroke="currentColor" stroke-linecap="round"
@@ -45,19 +45,68 @@
                 </div>
 
                 <div class="p-4 rounded-lg">
-                    <form action="{{ route('category.update', ['category' => $category->id]) }}" method="POST">
+                    <form action="{{ route('quiz.update', ['quiz' => $quiz->id]) }}" method="POST">
                         @csrf
                         <div class="relative overflow-x-auto shadow-sm sm:rounded-md">
-                            <label for="name"
-                                   class="block mb-2 px-1 text-sm font-medium text-gray-900">
-                                Category Name
-                            </label>
-                            <input type="text" id="name" name="name"
-                                   class="bg-gray-50 border border-gray-300 text-gray-900
+                            <div class="mb-5">
+                                <label for="title"
+                                       class="block mb-2 text-sm font-medium text-gray-900">
+                                    Title
+                                </label>
+                                <input type="text" id="title" name="title"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900
                                        text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                   placeholder="Category" value="{{ $category->name }}"
-                                   required/>
-                            <x-input-error :messages="$errors->get('name')" class="mt-2"/>
+                                       placeholder="Title" value="{{ $quiz->title }}" required/>
+                                @error('title')
+                                <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-5">
+                                <label for="quiz_date"
+                                       class="block mb-2 text-sm font-medium text-gray-900">
+                                    Date
+                                </label>
+                                <input type="date" id="quiz_date" name="quiz_date"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900
+                                       text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                       value="{{ date('Y-m-d', strtotime($quiz->quiz_date)) }}" required/>
+                                @error('quiz_date')
+                                <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-5">
+                                <label for="quiz_duration"
+                                       class="block mb-2 text-sm font-medium text-gray-900">
+                                    Duration (in minutes)
+                                </label>
+                                <input type="number" id="quiz_duration" name="quiz_duration"
+                                       class="bg-gray-50 border border-gray-300 text-gray-900
+                                       text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                       placeholder="Duration (in minutes)" value="{{ $quiz->quiz_duration }}" required/>
+                                @error('quiz_duration')
+                                <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="mb-5">
+                                <label for="category_id"
+                                       class="block mb-2 text-sm font-medium text-gray-900">
+                                    Category
+                                </label>
+                                <select id="category_id" name="category_id"
+                                        class="bg-gray-50 border border-gray-300 text-gray-900
+                                        text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                                         required>
+                                    <option value="{{ $quiz->category->id }}">{{ $quiz->category->name }}</option>
+                                    @foreach ($categories as $category)
+                                        @if ($category->id !== $quiz->category->id)
+                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                        @endif
+                                    @endforeach
+                                </select>
+                                @error('category_id')
+                                <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
+                                @enderror
+                            </div>
                         </div>
 
                         <div class="p-1 pt-2 flex justify-center mt-2">

@@ -73,15 +73,15 @@
                             <tbody class="text-gray-900">
                             @forelse($categories as $category)
                                 <tr class="bg-white border-b">
-                                    <th scope="row"
-                                        class="px-6 py-2 font-medium  whitespace-nowrap text-center">
+                                    <td scope="row"
+                                        class="px-6 py-2 min-w-3 max-w-3 whitespace-nowrap text-center">
                                         {{ $loop->iteration + $categories->firstItem() - 1 }}
-                                    </th>
+                                    </td>
                                     <td class="px-6 py-2 min-w-52 max-w-52 text-center">
                                         {{ $category->name }}
                                     </td>
                                     <td class="px-6 py-2 text-center ">
-                                        <form action="{{ route('update-status', $category->id) }}"
+                                        <form action="{{ route('category.update-status', $category->id) }}"
                                               method="POST">
                                             @csrf
                                             @method('PATCH')
@@ -109,11 +109,11 @@
 
                                     </td>
                                     <td class="px-6 py-2 flex justify-center gap-3">
-                                        <a href="{{ route('edit-category', $category->id) }}"
+                                        <a href="{{ route('category.edit', $category->id) }}"
                                            class="bg-green-500 px-5 py-2 rounded-lg
                                            font-medium text-white hover:bg-green-700">Edit
                                         </a>
-                                        <a href="{{ route('delete-category', ['id' => $category['id']]) }}"
+                                        <a href="{{ route('category.delete', ['id' => $category['id']]) }}"
                                            class="bg-red-700 px-5 py-2 rounded-lg font-medium text-white
                                    hover:bg-red-800">Delete</a>
 
@@ -182,7 +182,7 @@
 
                     <!-- Modal body (add) -->
                     <div class="p-4 md:p-5">
-                        <form method="POST" action="{{ route('add-category') }}" class="flex
+                        <form method="POST" action="{{ route('category.store') }}" class="flex
                         flex-col gap-2">
                             @csrf
                             <div class="mb-5">
