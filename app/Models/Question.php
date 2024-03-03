@@ -14,7 +14,8 @@ class Question extends Model
     protected $fillable = [
         'quiz_id',
         'question_text',
-        'answer_type',
+        'answer',
+        'option',
         'status'
     ];
 
@@ -22,7 +23,4 @@ class Question extends Model
         return $this->belongsTo(Quiz::class, 'quiz_id');
     }
 
-    public function options() {
-        return $this->hasMany(Option::class, 'option_id');
-    }
 }

@@ -29,8 +29,4 @@ class Quiz extends Model
         return $this->hasMany(Question::class, 'question_id')->withDefault();
     }
 
-    public function attempts()
-    {
-        return $this->hasMany(QuizAttempt::class, 'quiz_attempt_id')->withDefault();
-    }
 }
