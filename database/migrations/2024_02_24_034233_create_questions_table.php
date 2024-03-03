@@ -15,8 +15,9 @@ return new class extends Migration {
 
             $table->foreignId('quiz_id')->constrained()->onDelete('cascade');
             $table->string('question_text')->nullable();
-            $table->enum('answer_type', ['single', 'multiple'])->comment('single or multiple'); //
-            $table->string('status')->nullable();
+            $table->string('answer')->nullable();
+            $table->string('options')->nullable();
+            $table->tinyInteger('status')->default(1)->comment('0: Inactive, 1: Active');
 
             $table->timestamps();
         });

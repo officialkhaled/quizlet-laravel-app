@@ -15,7 +15,7 @@ return new class extends Migration {
 
             $table->string('title')->nullable();
             $table->foreignId('category_id')->constrained()->onDelete('cascade');
-            $table->string('quiz_date')->nullable();
+            $table->date('quiz_date')->nullable();
             $table->integer('quiz_duration')->nullable();
             $table->tinyInteger('status')->default(1)->comment('0: Inactive, 1: Active');
 
