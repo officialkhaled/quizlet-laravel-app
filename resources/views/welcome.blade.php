@@ -266,5 +266,18 @@
 
 @include('components.common.scripts')
 
+<script>
+
+    /* Loader */
+    window.addEventListener('beforeunload', function (e) {
+        document.getElementById('loadingScreen').style.display = 'flex';
+    });
+
+    window.addEventListener('load', function (e) {
+        document.getElementById('loadingOverlay').style.display = 'none';
+    });
+
+</script>
+
 </body>
 </html>

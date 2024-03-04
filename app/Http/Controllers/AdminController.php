@@ -33,7 +33,7 @@ class AdminController extends Controller
                 'admin' => $admin_count,
                 'category' => $category_count,
                 'question' => $question_count
-            ], compact('adminData'));
+            ], ['adminData' => $adminData]);
     }
 
     //Edit Exam

@@ -1,4 +1,5 @@
-<x-app-layout>
+@extends('admin.layout')
+@section('content')
 
     @include('components.common.sidebar')
 
@@ -46,4 +47,4 @@
         </div>
     </div>
 
-</x-app-layout>
+@endsection
