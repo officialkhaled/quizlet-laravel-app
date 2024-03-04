@@ -94,7 +94,7 @@
                             <p
                                 class="inline-flex items-center justify-center px-3 py-2 w-full text-lg
                            font-medium text-center text-white bg-teal-400 rounded-lg">
-                                2
+                                {{ $question }}
                             </p>
                         </div>
                     </div>

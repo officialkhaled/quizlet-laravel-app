@@ -27,12 +27,9 @@ class QuizController extends Controller
         $validatedData = $request->validate([
             'title' => 'required',
             'category_id' => 'required',
-            'quiz_date' => 'required|date_format:Y-m-d',
+            'quiz_date' => 'required',
             'quiz_duration' => 'required',
         ]);
-
-        $date = DateTime::createFromFormat('m/d/Y', $request->quiz_date);
-        $quiz->quiz_date = $date->format('Y-m-d');
 
         try {
             $quiz->fill($validatedData)->save();

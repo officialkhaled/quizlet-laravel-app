@@ -67,11 +67,22 @@
                                        class="block mb-2 text-sm font-medium text-gray-900">
                                     Date
                                 </label>
-                                <input type="date" id="quiz_date" name="quiz_date"
-                                       class="bg-gray-50 border border-gray-300 text-gray-900
-                                       text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                       value="{{ date('Y-m-d', strtotime($quiz->quiz_date)) }}"
-                                       required/>
+                                <div class="relative">
+                                    <div
+                                        class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+                                        <svg class="w-4 h-4 text-gray-500" aria-hidden="true"
+                                             xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                                             viewBox="0 0 20 20">
+                                            <path
+                                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z"/>
+                                        </svg>
+                                    </div>
+                                    <input type="text" id="quiz_date" name="quiz_date" datepicker
+                                           datepicker-buttons datepicker-autoselect-today datepicker-format="yyyy-mm-dd"
+                                           class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
+                                            rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
+                                           placeholder="Select date" value="{{ $quiz->quiz_date }}" required>
+                                </div>
                                 @error('quiz_date')
                                 <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                                 @enderror
@@ -112,8 +123,7 @@
                                         @foreach ($categories as $category)
                                             <li class="my-0.5">
                                                 <a href="#"
-                                                   class="dropdown-item block px-4 py-2
-                                           hover:bg-gray-100 border border-gray-200 rounded-lg"
+                                                class="dropdown-item block px-4 py-2 hover:bg-gray-200 font-semibold rounded-md"
                                                    data-value="{{ $category->id }}">{{ $category->name }}</a>
                                             </li>
                                         @endforeach

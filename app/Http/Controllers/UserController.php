@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
+use App\Models\Question;
+use App\Models\Quiz;
 use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,7 +17,16 @@ class UserController extends Controller
         $id = Auth::user()->id;
         $userData = User::find($id);
 
-        return view('user.partials.dashboard', compact('userData'));
+        $category_count = Category::get()->count();
+        $quiz_count = Quiz::get()->count();
+        $question_count = Question::get()->count();
+
+        return view('user.partials.dashboard', [
+            'quiz' => $quiz_count,
+            'category' => $category_count,
+            'question' => $question_count,
+            'userData' => $userData
+        ]);
     }
 
     public function welcome_quiz()

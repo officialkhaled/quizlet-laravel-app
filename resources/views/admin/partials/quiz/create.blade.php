@@ -56,18 +56,11 @@
                                 </svg>
                             </div>
                             <input type="text" id="quiz_date" name="quiz_date" datepicker
-                                   datepicker-buttons datepicker-autoselect-today
+                                   datepicker-buttons datepicker-autoselect-today datepicker-format="yyyy-mm-dd"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
                                     rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
                                    placeholder="Select date" required>
                         </div>
-
-                        {{--<input type="date" id="quiz_date" name="quiz_date"
-                               class="bg-gray-50 border border-gray-300 text-gray-900
-                                       text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                               placeholder="Title" required/>--}}
-
-
                         @error('quiz_date')
                         <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                         @enderror
@@ -90,12 +83,9 @@
                         text-gray-900">Category</label>
                         <!-- Dropdown button -->
                         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                                class="text-gray-600 bg-gray-50 border border-gray-300
-                                hover:bg-gray-200 focus:border-2 focus:ring-blue-500 focus:border-blue-500 rounded-lg
-                                text-sm p-2.5 text-center inline-flex items-center w-full"
-                                type="button">
+                                class="text-gray-600 bg-gray-50 border border-gray-300 hover:bg-gray-200 focus:border-2 focus:ring-blue-500 focus:border-blue-500 rounded-lg text-sm p-2.5 text-center inline-flex items-center w-full" type="button">
                             Select a category
-                            <svg class="w-2.5 h-2.5 ms-3" aria-hidden="true"
+                            <svg class="w-2.5 h-2.5 ms-auto" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
                                 <path stroke="currentColor" stroke-linecap="round"
                                       stroke-linejoin="round" stroke-width="2" d="m1 1 4 4 4-4"/>
@@ -110,8 +100,7 @@
                                 @foreach ($categories as $category)
                                     <li class="my-0.5">
                                         <a href="#"
-                                           class="dropdown-item block px-4 py-2
-                                           hover:bg-gray-100 border border-gray-200 rounded-lg"
+                                           class="dropdown-item block px-4 py-2 hover:bg-gray-200 font-semibold rounded-md"
                                            data-value="{{ $category->id }}">{{ $category->name }}</a>
                                     </li>
                                 @endforeach
