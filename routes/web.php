@@ -56,8 +56,8 @@ Route::middleware(['auth'])->group(function () {
 
         /* Question */
         Route::group(['prefix' => 'question', 'as' => 'question.'], function () {
-            Route::get('/', [QuestionController::class, 'index'])->name('index');
-            Route::post('/create', [QuestionController::class, 'store'])->name('store');
+            Route::get('/{id}', [QuestionController::class, 'index'])->name('index');
+            Route::post('/create/{id}', [QuestionController::class, 'store'])->name('store');
             Route::get('/delete/{id}', [QuestionController::class, 'destroy'])->name('delete');
             Route::patch('/update-status/{id}', [QuestionController::class, 'updateStatus'])->name('update-status');
             Route::get('/edit/{quiz}', [QuestionController::class, 'edit'])->name('edit');

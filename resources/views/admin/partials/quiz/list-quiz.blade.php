@@ -124,8 +124,7 @@
                                                     text-gray-900 min-w-14">{{ $quiz->status == 1 ?
                                                     'Active' : 'Inactive' }}</span>
                                             </label>
-                                            <input type="hidden" name="id"
-                                                   value="{{ $quiz->id }}">
+                                            <input type="hidden" name="id" value="{{ $quiz->id }}">
                                         </form>
                                     </td>
 

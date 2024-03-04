@@ -2,36 +2,111 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
+use App\Models\Question;
 use App\Models\Quiz;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    public function index()
+    public function index($id)
     {
-        $categories = Category::where('status', '1')->get();
-        $quizzes = Quiz::select(['quizzes.*', 'categories.name as category_name'])
-            ->join('categories', 'quizzes.category_id', '=', 'categories.id')
-            ->paginate(10);
-
-        return view('admin.partials.question.list-question', [
-            'quizzes' => $quizzes,
-            'categories' => $categories
-        ]);
+        $data['questions'] = Question::where('quiz_id', $id)->paginate(10);
+        return view('admin.partials.question.list-question', $data);
     }
 
-    public function store(Request $request, Quiz $quiz)
+    public function add_questions($id)
+    {
+        $data['questions'] = Question::where('quiz_id', $id)->get()->toArray();
+        return view('admin.add_questions', $data);
+    }
+
+    //adding new questions
+    public function add_new_question(Request $request)
+    {
+
+        $validator = Validator::make($request->all(), [
+            'question' => 'required',
+            'option_1' => 'required',
+            'option_2' => 'required',
+            'option_3' => 'required',
+            'option_4' => 'required',
+            'ans' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            $arr = array('status' => 'false', 'message' => $validator->errors()->all());
+
+        } else {
+
+            $q = new Oex_question_master();
+            $q->exam_id = $request->exam_id;
+            $q->questions = $request->question;
+
+            if ($request->ans == 'option_1') {
+                $q->ans = $request->option_1;
+            } elseif ($request->ans == 'option_2') {
+                $q->ans = $request->option_2;
+            } elseif ($request->ans == 'option_3') {
+                $q->ans = $request->option_3;
+            } else {
+                $q->ans = $request->option_4;
+            }
+
+
+            $q->status = 1;
+            $q->options = json_encode(array(
+                'option1' => $request->option_1,
+                'option2' => $request->option_2,
+                'option3' => $request->option_3,
+                'option4' => $request->option_4
+            ));
+
+            $q->save();
+
+            $arr = array('status' => 'true', 'message' => 'successfully added',
+                'reload' => url('admin/add_questions/' . $request->exam_id));
+        }
+
+        echo json_encode($arr);
+    }
+
+    public function store(Request $request, Question $question)
     {
         $validatedData = $request->validate([
-            'title' => 'required',
-            'category_id' => 'required',
-            'quiz_date' => 'required',
-            'quiz_duration' => 'required',
+            'question_text' => 'required',
+            'option_1' => 'required',
+            'option_2' => 'required',
+            'option_3' => 'required',
+            'option_4' => 'required',
+            'answer' => 'required'
         ]);
 
         try {
-            $quiz->fill($validatedData)->save();
+//            $q = new Oex_question_master();
+            $question->quiz_id = $request->quiz_id;
+            $question->questions = $request->question_text;
+
+            if ($request->answer == 'option_1') {
+                $question->answer = $request->option_1;
+            } elseif ($request->answer == 'option_2') {
+                $question->answer = $request->option_2;
+            } elseif ($request->answer == 'option_3') {
+                $question->answer = $request->option_3;
+            } else {
+                $question->answer = $request->option_4;
+            }
+
+            $question->options = json_encode(array(
+                'option1' => $request->option_1,
+                'option2' => $request->option_2,
+                'option3' => $request->option_3,
+                'option4' => $request->option_4
+            ));
+
+            $question->save();
+
+            $question->fill($validatedData)->save();
             return redirect()->back()->with('success', 'Quiz added successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong.', 500);
