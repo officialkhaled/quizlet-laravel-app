@@ -15,10 +15,9 @@ class QuestionController extends Controller
         return view('admin.partials.question.list-question', $data);
     }
 
-    public function add_questions($id)
+    public function create()
     {
-        $data['questions'] = Question::where('quiz_id', $id)->get()->toArray();
-        return view('admin.add_questions', $data);
+        return view('admin.partials.question.create');
     }
 
     //adding new questions

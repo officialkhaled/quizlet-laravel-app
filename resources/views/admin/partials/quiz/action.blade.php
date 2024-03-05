@@ -8,7 +8,7 @@
     Delete
 </a>
 
-<a href="{{ route('question.index', $quiz->id) }}"
+<a href="{{ route('quiz.question.index', $quiz->id) }}"
    class="bg-sky-700 px-5 py-2 rounded-lg font-medium text-white hover:bg-sky-800">
     Add Question
 </a>
