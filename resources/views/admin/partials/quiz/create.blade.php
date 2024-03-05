@@ -56,7 +56,8 @@
                                 </svg>
                             </div>
                             <input type="text" id="quiz_date" name="quiz_date" datepicker
-                                   datepicker-buttons datepicker-autoselect-today datepicker-format="yyyy-mm-dd"
+                                   datepicker-buttons datepicker-autoselect-today
+                                   datepicker-format="yyyy-mm-dd"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
                                     rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
                                    placeholder="Select date" required>
@@ -83,7 +84,8 @@
                         text-gray-900">Category</label>
                         <!-- Dropdown button -->
                         <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
-                                class="text-gray-600 bg-gray-50 border border-gray-300 hover:bg-gray-200 focus:border-2 focus:ring-blue-500 focus:border-blue-500 rounded-lg text-sm p-2.5 text-center inline-flex items-center w-full" type="button">
+                                class="text-gray-600 bg-gray-50 border border-gray-300 hover:bg-gray-200 focus:border-2 focus:ring-blue-500 focus:border-blue-500 rounded-lg text-sm p-2.5 text-center inline-flex items-center w-full"
+                                type="button">
                             Select a category
                             <svg class="w-2.5 h-2.5 ms-auto" aria-hidden="true"
                                  xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">

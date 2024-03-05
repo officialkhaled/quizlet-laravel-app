@@ -52,17 +52,19 @@ Route::middleware(['auth'])->group(function () {
             Route::patch('/update-status/{id}', [QuizController::class, 'updateStatus'])->name('update-status');
             Route::get('/edit/{quiz}', [QuizController::class, 'edit'])->name('edit');
             Route::post('/{quiz}', [QuizController::class, 'update'])->name('update');
+
+            /* Question */
+            Route::group(['prefix' => 'question', 'as' => 'question.'], function () {
+                Route::get('/{id}', [QuestionController::class, 'index'])->name('index');
+                Route::get('/{id}/create', [QuestionController::class, 'create'])->name('create');
+                Route::post('/store', [QuestionController::class, 'store'])->name('store');
+                Route::get('/delete/{id}', [QuestionController::class, 'destroy'])->name('delete');
+                Route::patch('/update-status/{id}', [QuestionController::class, 'updateStatus'])->name('update-status');
+                Route::get('/edit/{quiz}', [QuestionController::class, 'edit'])->name('edit');
+                Route::post('/{quiz}', [QuestionController::class, 'update'])->name('update');
+            });
         });
 
-        /* Question */
-        Route::group(['prefix' => 'question', 'as' => 'question.'], function () {
-            Route::get('/{id}', [QuestionController::class, 'index'])->name('index');
-            Route::post('/create/{id}', [QuestionController::class, 'store'])->name('store');
-            Route::get('/delete/{id}', [QuestionController::class, 'destroy'])->name('delete');
-            Route::patch('/update-status/{id}', [QuestionController::class, 'updateStatus'])->name('update-status');
-            Route::get('/edit/{quiz}', [QuestionController::class, 'edit'])->name('edit');
-            Route::post('/{quiz}', [QuestionController::class, 'update'])->name('update');
-        });
 
         /* Profile */
         Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

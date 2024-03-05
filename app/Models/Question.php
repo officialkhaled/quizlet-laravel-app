@@ -14,13 +14,18 @@ class Question extends Model
     protected $fillable = [
         'quiz_id',
         'question_text',
-        'option',
+        'choice',
         'answer',
         'status'
     ];
 
-    public function quiz() {
+    public function quiz()
+    {
         return $this->belongsTo(Quiz::class, 'quiz_id');
     }
 
+    public function options()
+    {
+        return $this->hasMany(Option::class, 'choice');
+    }
 }
