@@ -69,7 +69,8 @@
                                 <input type="date" id="quiz_date" name="quiz_date"
                                        class="bg-gray-50 border border-gray-300 text-gray-900
                                        text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                       value="{{ date('Y-m-d', strtotime($quiz->quiz_date)) }}" required/>
+                                       value="{{ date('Y-m-d', strtotime($quiz->quiz_date)) }}"
+                                       required/>
                                 @error('quiz_date')
                                 <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                                 @enderror
@@ -82,7 +83,8 @@
                                 <input type="number" id="quiz_duration" name="quiz_duration"
                                        class="bg-gray-50 border border-gray-300 text-gray-900
                                        text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                       placeholder="Duration (in minutes)" value="{{ $quiz->quiz_duration }}" required/>
+                                       placeholder="Duration (in minutes)"
+                                       value="{{ $quiz->quiz_duration }}" required/>
                                 @error('quiz_duration')
                                 <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
                                 @enderror
@@ -95,11 +97,13 @@
                                 <select id="category_id" name="category_id"
                                         class="bg-gray-50 border border-gray-300 text-gray-900
                                         text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                                         required>
-                                    <option value="{{ $quiz->category->id }}">{{ $quiz->category->name }}</option>
+                                        required>
+                                    <option
+                                        value="{{ $quiz->category->id }}">{{ $quiz->category->name }}</option>
                                     @foreach ($categories as $category)
                                         @if ($category->id !== $quiz->category->id)
-                                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                            <option
+                                                value="{{ $category->id }}">{{ $category->name }}</option>
                                         @endif
                                     @endforeach
                                 </select>

@@ -15,6 +15,7 @@ return new class extends Migration {
 
             $table->foreignId('quiz_id')->constrained()->onDelete('cascade');
             $table->string('question_text');
+            $table->tinyInteger('answer_type')->comment('0: Single, 1: Multiple')->nullable();
             $table->tinyInteger('status')->default(1)->comment('0: Inactive, 1: Active');
 
             $table->timestamps();
