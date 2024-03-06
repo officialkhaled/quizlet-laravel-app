@@ -16,7 +16,7 @@ return new class extends Migration {
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->foreignId('quiz_id')->constrained()->onDelete('cascade');
             $table->string('quiz_joined')->nullable();
-            $table->string('std_status')->nullable();
+            $table->tinyInteger('std_status')->default(1)->comment('0: Inactive, 1: Active');
 
             $table->timestamps();
         });
