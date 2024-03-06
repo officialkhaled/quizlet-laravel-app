@@ -57,10 +57,11 @@
                             </div>
                             <input type="text" id="quiz_date" name="quiz_date" datepicker
                                    datepicker-buttons datepicker-autoselect-today
+                                   datepicker-autohide
                                    datepicker-format="yyyy-mm-dd"
                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
                                     rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
-                                   placeholder="Select date" required>
+                                   placeholder="Select date" autocomplete="off" required>
                         </div>
                         @error('quiz_date')
                         <div class="mt-2 text-sm text-red-600">{{ $message }}</div>

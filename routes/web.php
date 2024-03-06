@@ -57,10 +57,10 @@ Route::middleware(['auth'])->group(function () {
             Route::group(['prefix' => 'question', 'as' => 'question.'], function () {
                 Route::get('/{id}', [QuestionController::class, 'index'])->name('index');
                 Route::get('/{id}/create', [QuestionController::class, 'create'])->name('create');
-                Route::post('/store', [QuestionController::class, 'store'])->name('store');
+                Route::post('/{quiz}/store', [QuestionController::class, 'store'])->name('store');
                 Route::get('/delete/{id}', [QuestionController::class, 'destroy'])->name('delete');
                 Route::patch('/update-status/{id}', [QuestionController::class, 'updateStatus'])->name('update-status');
-                Route::get('/edit/{quiz}', [QuestionController::class, 'edit'])->name('edit');
+                Route::get('/{quiz}/edit/{id}', [QuestionController::class, 'edit'])->name('edit');
                 Route::post('/{quiz}', [QuestionController::class, 'update'])->name('update');
             });
         });

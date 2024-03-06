@@ -6,13 +6,16 @@ use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class QuestionController extends Controller
 {
     public function index($id)
     {
-        $data['questions'] = Question::where('quiz_id', $id)->paginate(10);
-        return view('admin.partials.question.list-question', $data);
+        $questions = Question::where('quiz_id', $id)->paginate(10);
+        return view('admin.partials.question.list-question', [
+            'questions' => $questions
+        ]);
     }
 
     public function create()
@@ -20,93 +23,36 @@ class QuestionController extends Controller
         return view('admin.partials.question.create');
     }
 
-    //adding new questions
-    public function add_new_question(Request $request)
+    public function store(Request $request, Quiz $quiz)
     {
-
-        $validator = Validator::make($request->all(), [
-            'question' => 'required',
-            'option_1' => 'required',
-            'option_2' => 'required',
-            'option_3' => 'required',
-            'option_4' => 'required',
-            'ans' => 'required'
-        ]);
-
-        if ($validator->fails()) {
-            $arr = array('status' => 'false', 'message' => $validator->errors()->all());
-
-        } else {
-
-            $q = new Oex_question_master();
-            $q->exam_id = $request->exam_id;
-            $q->questions = $request->question;
-
-            if ($request->ans == 'option_1') {
-                $q->ans = $request->option_1;
-            } elseif ($request->ans == 'option_2') {
-                $q->ans = $request->option_2;
-            } elseif ($request->ans == 'option_3') {
-                $q->ans = $request->option_3;
-            } else {
-                $q->ans = $request->option_4;
-            }
-
-
-            $q->status = 1;
-            $q->options = json_encode(array(
-                'option1' => $request->option_1,
-                'option2' => $request->option_2,
-                'option3' => $request->option_3,
-                'option4' => $request->option_4
-            ));
-
-            $q->save();
-
-            $arr = array('status' => 'true', 'message' => 'successfully added',
-                'reload' => url('admin/add_questions/' . $request->exam_id));
-        }
-
-        echo json_encode($arr);
-    }
-
-    public function store(Request $request, Question $question)
-    {
-        $validatedData = $request->validate([
+        // dd($request->all());
+        /* $validatedData = $request->validate([
             'question_text' => 'required',
-            'option_1' => 'required',
-            'option_2' => 'required',
-            'option_3' => 'required',
-            'option_4' => 'required',
-            'answer' => 'required'
-        ]);
+            'answer_type' => 'required',
+        ]); */
 
         try {
-//            $q = new Oex_question_master();
-            $question->quiz_id = $request->quiz_id;
-            $question->questions = $request->question_text;
+            $isCorrect = $request->input('is_correct');
+            $options = collect($request->input('choice'))->filter(fn($value) => $value !== null);
+            $formatData = [
+                'question_text' => $request->input('question_text'),
+                'answer_type' => $request->input('answer_type'),
+            ];
 
-            if ($request->answer == 'option_1') {
-                $question->answer = $request->option_1;
-            } elseif ($request->answer == 'option_2') {
-                $question->answer = $request->option_2;
-            } elseif ($request->answer == 'option_3') {
-                $question->answer = $request->option_3;
-            } else {
-                $question->answer = $request->option_4;
+            DB::beginTransaction();
+            $question = $quiz->questions()->create($formatData);
+
+            foreach ($options as $key => $option) {
+                $formatOptions = [
+                    'choice' => $option,
+                    'is_correct' => $isCorrect == $key ? 1 : 0,
+                ];
+
+                $question->options()->create($formatOptions);
             }
+            DB::commit();
 
-            $question->options = json_encode(array(
-                'option1' => $request->option_1,
-                'option2' => $request->option_2,
-                'option3' => $request->option_3,
-                'option4' => $request->option_4
-            ));
-
-            $question->save();
-
-            $question->fill($validatedData)->save();
-            return redirect()->back()->with('success', 'Quiz added successfully.');
+            return redirect()->back()->with('success', 'Question added successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong.', 500);
         }

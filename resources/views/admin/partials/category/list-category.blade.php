@@ -99,10 +99,14 @@
                                         after:bg-white after:border-gray-300 after:border
                                         after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600">
                                                 </div>
-                                                <span
-                                                    class="ms-3 text-sm font-medium
-                                                    text-gray-900 min-w-14">{{ $category->status == 1 ?
-                                                    'Active' : 'Inactive' }}</span>
+                                                @if($category->status == 1)
+                                                    <span
+                                                        class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded ms-3 text-sm font-medium  min-w-20">Active</span>
+                                                @else
+                                                    <span
+                                                        class="bg-red-100 text-red-800 font-medium me-2 px-2.5 py-0.5 rounded ms-3 text-sm min-w-20">Inactive</span>
+                                                @endif
+
                                             </label>
                                             <input type="hidden" name="id"
                                                    value="{{ $category->id }}">
