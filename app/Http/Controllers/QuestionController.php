@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Option;
 use App\Models\Question;
 use App\Models\Quiz;
 use App\Models\Category;
@@ -12,9 +13,11 @@ class QuestionController extends Controller
 {
     public function index($id)
     {
-        $questions = Question::where('quiz_id', $id)->paginate(10);
+        $questions = Question::with('correctAnswers')->where('quiz_id', $id)->paginate(10);
+        $answer = Option::where('is_correct', 1)->get()->first();
         return view('admin.partials.question.list-question', [
-            'questions' => $questions
+            'questions' => $questions,
+            'answer' => $answer,
         ]);
     }
 
@@ -23,13 +26,52 @@ class QuestionController extends Controller
         return view('admin.partials.question.create');
     }
 
+    /* public function store(Request $request, Quiz $quiz)
+     {
+         // Validate the incoming request data
+         $validatedData = $request->validate([
+             'question_text' => 'required',
+             'answer_type' => 'required',
+             'choice' => 'required',
+             'choice.*' => 'required',
+             'is_correct' => 'required' . implode(',', array_keys($request->input('choice', []))),
+         ]);
+
+         try {
+             $isCorrect = $validatedData['is_correct'];
+             $options = collect($validatedData['choice'])->filter(fn($value) => $value !== null);
+
+             DB::beginTransaction();
+             $formatData = [
+                 'question_text' => $validatedData['question_text'],
+                 'answer_type' => $validatedData['answer_type'],
+             ];
+
+             $question = $quiz->questions()->create($formatData);
+
+             foreach ($options as $key => $option) {
+                 $formatOptions = [
+                     'choice' => $option,
+                     'is_correct' => $isCorrect == $key ? 1 : 0,
+                 ];
+
+                 $question->options()->create($formatOptions);
+             }
+             DB::commit();
+
+             return redirect()->back()->with('success', 'Question added successfully.');
+         } catch (\Exception $e) {
+             DB::rollBack();
+             return redirect()->back()->with('error', 'Something went wrong. Error: ' . $e->getMessage());
+         }
+     }*/
+
     public function store(Request $request, Quiz $quiz)
     {
-        // dd($request->all());
-        /* $validatedData = $request->validate([
+        /*$validatedData = $request->validate([
             'question_text' => 'required',
             'answer_type' => 'required',
-        ]); */
+        ]);*/
 
         try {
             $isCorrect = $request->input('is_correct');
@@ -52,60 +94,80 @@ class QuestionController extends Controller
             }
             DB::commit();
 
-            return redirect()->back()->with('success', 'Question added successfully.');
+            return redirect()->route('quiz.question.index', ['id' => $quiz])->with('success', 'Question added successfully.');
         } catch (\Exception $e) {
             return redirect()->back()->with('error', 'Something went wrong.', 500);
         }
     }
 
-    public function edit($id)
+    public function edit(Quiz $quiz, $id)
     {
-        $quiz = Quiz::where('id', $id)->get()->first();
-        $categories = Category::query()
-            ->where('id', $id)->get()->first()
-            ->where('status', '1')->get();
+        $question = $quiz->questions()->findOrFail($id);
 
         return view('admin.partials.question.edit-question', [
             'quiz' => $quiz,
-            'categories' => $categories,
+            'question' => $question,
         ]);
     }
 
-    public function update(Request $request, Quiz $quiz)
+
+    public function update(Request $request, Quiz $quiz, $id)
     {
+        /*$validatedData = $request->validate([
+            'question_text' => 'required|string|max:255',
+            'answer_type' => 'required|string',
+            'choice' => 'required|array|min:1',
+            'choice.*' => 'required|string|max:255',
+            'answer' => 'required',
+        ]);*/
 
-        $validatedData = $request->validate([
-            'title' => 'required',
-            'category_id' => 'required',
-            'quiz_date' => 'required',
-            'quiz_duration' => 'required',
-        ]);
+        try {
+            DB::beginTransaction();
 
-        $quiz->update([
-            'title' => $validatedData['title'],
-            'category_id' => $validatedData['category_id'],
-            'quiz_date' => $validatedData['quiz_date'],
-            'quiz_duration' => $validatedData['quiz_duration'],
-        ]);
+            $question = $quiz->questions()->findOrFail($id);
 
-        return redirect()->route('question.index')->with('success', 'Quiz updated successfully.');
+            $isCorrect = $request->input('is_correct');
+            $options = collect($request->input('choice'))->filter(fn($value) => !is_null($value));
+
+            $formatData = [
+                'question_text' => $request->input('question_text'),
+                'answer_type' => $request->input('answer_type'),
+            ];
+
+            $question->update($formatData);
+
+            $question->options()->delete();
+            foreach ($options as $key => $option) {
+                $question->options()->create([
+                    'choice' => $option,
+                    'is_correct' => $isCorrect == $key ? 1 : 0,
+                ]);
+            }
+
+            DB::commit();
+
+            return redirect()->route('quiz.question.index', ['id' => $quiz])->with('success', 'Question updated successfully.');
+        } catch (\Exception $e) {
+            DB::rollBack();
+            return redirect()->back()->with('error', 'Something went wrong: ' . $e->getMessage());
+        }
     }
 
     public function destroy($id)
     {
-        $quiz = Quiz::where('id', $id)->get()->first();
-        $quiz->delete();
+        $question = Question::where('id', $id)->get()->first();
+        $question->delete();
 
         return redirect()->back();
     }
 
     public function updateStatus($id)
     {
-        $quiz = Quiz::findOrFail($id);
+        $question = Question::findOrFail($id);
 
-        $quiz->status = $quiz->status == 1 ? 0 : 1;
-        $quiz->save();
+        $question->status = $question->status == 1 ? 0 : 1;
+        $question->save();
 
-        return back()->with('success', 'Quiz status updated successfully.');
+        return back()->with('success', 'Question status updated successfully.');
     }
 }
