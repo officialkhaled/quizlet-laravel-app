@@ -80,6 +80,7 @@
                                        class="block mb-2 text-sm font-medium text-gray-900">
                                     Answer Type
                                 </label>
+                                <input type="hidden" id="answer_type" name="answer_type" value="">
                                 <!-- Dropdown button -->
                                 <button id="dropdownDefaultButton" data-dropdown-toggle="dropdown"
                                         class="text-gray-600 bg-gray-50 border border-gray-300
@@ -212,9 +213,11 @@
                 document.getElementById('dropdown').style.display = 'none';
             }
 
-            // Function to update the dropdown button text
-            function updateDropdownText(text) {
+            // Function to update the dropdown button text and hidden input
+            function updateAnswerType(type, text) {
+                document.getElementById('answer_type').value = type;
                 document.getElementById('dropdownDefaultButton').textContent = text;
+                hideDropdown();
             }
 
             // Event listener for the dropdown button to toggle the dropdown visibility
@@ -230,18 +233,15 @@
             // Event listener for the radio answer dropdown item
             document.getElementById('radioAns').addEventListener('click', function () {
                 showSection('radioSection');
-                hideDropdown();
-                updateDropdownText(this.textContent);
+                updateAnswerType('0', this.textContent); // 0 for Single Answer
             });
 
             // Event listener for the checkbox answer dropdown item
             document.getElementById('checkboxAns').addEventListener('click', function () {
                 showSection('checkboxSection');
-                hideDropdown();
-                updateDropdownText(this.textContent);
+                updateAnswerType('1', this.textContent); // 1 for Multiple Answers
             });
         });
-
 
     </script>
 
