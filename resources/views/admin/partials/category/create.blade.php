@@ -41,8 +41,7 @@
                     </div>
                     <button type="submit"
                             class="ml-auto text-white bg-blue-700 hover:bg-blue-800
-                                    focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5
-                                     text-center">
+                                    focus:outline-none font-medium rounded-md text-sm px-3 py-1 text-center">
                         Create
                     </button>
                 </form>

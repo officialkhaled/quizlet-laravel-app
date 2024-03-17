@@ -110,7 +110,6 @@ class QuestionController extends Controller
         ]);
     }
 
-
     public function update(Request $request, Quiz $quiz, $id)
     {
         /*$validatedData = $request->validate([
@@ -138,7 +137,7 @@ class QuestionController extends Controller
 
             $question->options()->delete();
             foreach ($options as $key => $option) {
-                $question->options()->create([
+                $question->options()->create0([
                     'choice' => $option,
                     'is_correct' => $isCorrect == $key ? 1 : 0,
                 ]);

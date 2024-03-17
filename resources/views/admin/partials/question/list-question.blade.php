@@ -31,19 +31,18 @@
                         </li>
                     </ol>
 
-
                     <a href="{{ route('quiz.question.create', ['id' => request()->route('id')]) }}"
                        class="inline-flex items-center
-                    justify-center px-5 py-2 mr-3 text-base font-medium text-center text-white
-                    rounded-lg bg-blue-700 hover:bg-blue-800">
+                    justify-center px-3 py-1 mr-3 text-sm font-medium text-center text-white
+                    rounded-md bg-blue-700 hover:bg-blue-800">
                         Add
-                        <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" clip-rule="evenodd"
+                        <svg class="w-4 h-4 ml-2 -mr-1" fill="currentColor" clip-rule="evenodd"
                              fill-rule="evenodd" stroke-linejoin="round"
                              stroke-miterlimit="2" viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg">
                             <path
-                                    d="m12.002 2c5.518 0 9.998 4.48 9.998 9.998 0 5.517-4.48 9.997-9.998 9.997-5.517 0-9.997-4.48-9.997-9.997 0-5.518 4.48-9.998 9.997-9.998zm-.747 9.25h-3.5c-.414 0-.75.336-.75.75s.336.75.75.75h3.5v3.5c0 .414.336.75.75.75s.75-.336.75-.75v-3.5h3.5c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-3.5v-3.5c0-.414-.336-.75-.75-.75s-.75.336-.75.75z"
-                                    fill-rule="nonzero"/>
+                                d="m12.002 2c5.518 0 9.998 4.48 9.998 9.998 0 5.517-4.48 9.997-9.998 9.997-5.517 0-9.997-4.48-9.997-9.997 0-5.518 4.48-9.998 9.997-9.998zm-.747 9.25h-3.5c-.414 0-.75.336-.75.75s.336.75.75.75h3.5v3.5c0 .414.336.75.75.75s.75-.336.75-.75v-3.5h3.5c.414 0 .75-.336.75-.75s-.336-.75-.75-.75h-3.5v-3.5c0-.414-.336-.75-.75-.75s-.75.336-.75.75z"
+                                fill-rule="nonzero"/>
                         </svg>
                     </a>
                 </div>
@@ -102,14 +101,13 @@
                                     </td>
                                     <td class="px-6 py-2 text-center ">
                                         <form
-                                                action="{{ route('quiz.question.update-status', $question['id']) }}"
-                                                method="POST">
+                                            action="{{ route('quiz.question.update-status', $question['id']) }}"
+                                            method="POST">
                                             @csrf
                                             @method('PATCH')
                                             <label class="inline-flex items-center cursor-pointer">
                                                 <input type="checkbox" value="" class="sr-only peer"
-                                                       onchange="this.form.submit()" {{
-                                                    $question['status'] == 1 ? 'checked' : '' }}>
+                                                       onchange="this.form.submit()" {{ $question['status'] == 1 ? 'checked' : '' }}>
                                                 <div class="relative w-9 h-5 bg-gray-200
                                                     peer-focus:outline-none rounded-full peer
                                                     peer-checked:after:translate-x-full
@@ -119,10 +117,13 @@
                                                     after:bg-white after:border-gray-300 after:border
                                                     after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-blue-600">
                                                 </div>
-                                                <span
-                                                        class="ms-3 text-sm font-medium text-gray-900 min-w-14">
-                                                    {{ $question['status'] == 1 ? 'Active' : 'Inactive' }}
-                                                </span>
+                                                @if($question['status'] == 1)
+                                                    <span
+                                                        class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded ms-3 text-sm font-medium  min-w-20">Active</span>
+                                                @else
+                                                    <span
+                                                        class="bg-red-100 text-red-800 font-medium me-2 px-2.5 py-0.5 rounded ms-3 text-sm min-w-20">Inactive</span>
+                                                @endif
                                             </label>
                                             <input type="hidden" name="id"
                                                    value="{{ $question['id'] }}">

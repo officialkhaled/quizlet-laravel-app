@@ -31,8 +31,8 @@
                         </li>
                     </ol>
 
-                    <a href="{{ url()->previous() }}" class="inline-flex items-center justify-center px-5 py-2 mr-3 text-base
-                   font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800">
+                    <a href="{{ url()->previous() }}" class="inline-flex items-center justify-center px-3 py-1 rounded-md text-sm mr-3
+                   font-medium text-center text-white bg-blue-700 hover:bg-blue-800">
                         Back
                         <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" clip-rule="evenodd"
                              fill-rule="evenodd" stroke-linejoin="round"
@@ -78,10 +78,12 @@
                                         </svg>
                                     </div>
                                     <input type="text" id="quiz_date" name="quiz_date" datepicker
-                                           datepicker-buttons datepicker-autoselect-today datepicker-format="yyyy-mm-dd"
+                                           datepicker-buttons datepicker-autoselect-today
+                                           datepicker-format="yyyy-mm-dd"
                                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm
                                             rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-2.5"
-                                           placeholder="Select date" value="{{ $quiz->quiz_date }}" required>
+                                           placeholder="Select date" value="{{ $quiz->quiz_date }}"
+                                           required>
                                 </div>
                                 @error('quiz_date')
                                 <div class="mt-2 text-sm text-red-600">{{ $message }}</div>
@@ -123,7 +125,7 @@
                                         @foreach ($categories as $category)
                                             <li class="my-0.5">
                                                 <a href="#"
-                                                class="dropdown-item block px-4 py-2 hover:bg-gray-200 font-semibold rounded-md"
+                                                   class="dropdown-item block px-4 py-2 hover:bg-gray-200 font-semibold rounded-md"
                                                    data-value="{{ $category->id }}">{{ $category->name }}</a>
                                             </li>
                                         @endforeach
@@ -140,10 +142,10 @@
 
                         <div class="p-1 pt-2 flex justify-center mt-2">
                             <button type="submit" class="inline-flex items-center
-                        justify-center px-5 py-2 text-base font-medium text-center
-                        text-white rounded-lg bg-green-500 hover:bg-green-700">
+                        justify-center px-3 py-1 rounded-md text-sm font-medium text-center
+                        text-white bg-green-500 hover:bg-green-700">
                                 Update
-                                <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor"
+                                <svg class="w-3 h-3 ml-2 -mr-1" fill="currentColor"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                      viewBox="0 0 24 24">
                                     <path
