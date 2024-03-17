@@ -30,8 +30,7 @@
                         </li>
                     </ol>
 
-                    <a href="{{ url()->previous() }}" class="inline-flex items-center justify-center px-5 py-2 mr-3 text-base
-                   font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800">
+                    <a href="{{ url()->previous() }}" class="inline-flex items-center justify-center px-3 py-1 rounded-md text-sm mr-3 font-medium text-center text-white bg-blue-700 hover:bg-blue-800">
                         Back
                         <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" clip-rule="evenodd"
                              fill-rule="evenodd" stroke-linejoin="round"
@@ -62,10 +61,10 @@
 
                         <div class="p-1 pt-2 flex justify-center mt-2">
                             <button type="submit" class="inline-flex items-center
-                        justify-center px-5 py-2 text-base font-medium text-center
-                        text-white rounded-lg bg-green-500 hover:bg-green-700">
+                        justify-center px-3 py-1 rounded-md text-sm font-medium text-center
+                        text-white bg-green-500 hover:bg-green-700">
                                 Update
-                                <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor"
+                                <svg class="w-3 h-3 ml-2 -mr-1" fill="currentColor"
                                      xmlns="http://www.w3.org/2000/svg" width="24" height="24"
                                      viewBox="0 0 24 24">
                                     <path

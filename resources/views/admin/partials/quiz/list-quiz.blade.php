@@ -32,12 +32,12 @@
                     </ol>
 
 
-                    <button class="inline-flex items-center justify-center px-5 py-2 mr-3 text-base
-                   font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800"
+                    <button class="inline-flex items-center justify-center px-3 py-1 mr-3 text-sm
+                   font-medium text-center text-white rounded-md bg-blue-700 hover:bg-blue-800"
                             data-modal-target="addCategory-modal"
                             data-modal-toggle="addCategory-modal">
                         Add
-                        <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" clip-rule="evenodd"
+                        <svg class="w-3 h-3 ml-2 -mr-1" fill="currentColor" clip-rule="evenodd"
                              fill-rule="evenodd" stroke-linejoin="round"
                              stroke-miterlimit="2" viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg">
@@ -121,7 +121,7 @@
                                                 </div>
                                                 @if($quiz->status == 1)
                                                     <span
-                                                        class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded ms-3 text-sm font-medium  min-w-20">Active</span>
+                                                        class="bg-green-100 text-green-800 me-2 px-2.5 py-0.5 rounded ms-3 text-sm font-medium min-w-20">Active</span>
                                                 @else
                                                     <span
                                                         class="bg-red-100 text-red-800 font-medium me-2 px-2.5 py-0.5 rounded ms-3 text-sm min-w-20">Inactive</span>

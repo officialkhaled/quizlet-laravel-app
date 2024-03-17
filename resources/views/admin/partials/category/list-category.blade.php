@@ -32,12 +32,12 @@
                     </ol>
 
 
-                    <button class="inline-flex items-center justify-center px-5 py-2 mr-3 text-base
-                   font-medium text-center text-white rounded-lg bg-blue-700 hover:bg-blue-800"
-                            data-modal-target="addCategory-modal"
-                            data-modal-toggle="addCategory-modal">
+                    <button
+                        class="inline-flex items-center justify-center px-3 py-1 rounded-md text-sm mr-3 font-medium text-center text-white bg-blue-700 hover:bg-blue-800"
+                        data-modal-target="addCategory-modal"
+                        data-modal-toggle="addCategory-modal">
                         Add
-                        <svg class="w-5 h-5 ml-2 -mr-1" fill="currentColor" clip-rule="evenodd"
+                        <svg class="w-3 h-3 ml-2 -mr-1" fill="currentColor" clip-rule="evenodd"
                              fill-rule="evenodd" stroke-linejoin="round"
                              stroke-miterlimit="2" viewBox="0 0 24 24"
                              xmlns="http://www.w3.org/2000/svg">
@@ -116,9 +116,10 @@
                                     <td class="px-6 py-2 flex justify-center gap-3">
                                         @include('admin.partials.category.action')
 
-                                        <input type="button" name="showDiv" onclick="showDiv()"
-                                               class="bg-sky-500 px-5 py-2 rounded-lg font-medium text-white hover:bg-sky-800"
-                                               value="Show Div"></input>
+                                        {{-- <input type="button" name="showDiv" onclick="showDiv()"
+                                                class="bg-sky-500 px-5 py-2 rounded-lg font-medium text-white hover:bg-sky-800"
+                                                value="Show Div">
+                                         </input>--}}
 
                                     </td>
                                 </tr>
@@ -133,11 +134,11 @@
                         </table>
 
 
-                        <div class="bg-lime-400 text-center p-8 hidden" id="hiddenDiv">
+                        {{--<div class="bg-lime-400 text-center p-8 hidden" id="hiddenDiv">
                             <p class="text-4xl text-lime-800">
                                 SUCCESS
                             </p>
-                        </div>
+                        </div>--}}
 
 
                     </div>
