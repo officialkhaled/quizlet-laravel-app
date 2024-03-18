@@ -2,10 +2,11 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\QuizController;
+use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\StudentController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\CategoryController;
 
@@ -63,6 +64,16 @@ Route::middleware(['auth'])->group(function () {
                 Route::get('/{quiz}/edit/{id}', [QuestionController::class, 'edit'])->name('edit');
                 Route::patch('/{quiz}/update/{id}', [QuestionController::class, 'update'])->name('update');
             });
+        });
+
+        /* Student */
+        Route::group(['prefix' => 'student', 'as' => 'student.'], function () {
+            Route::get('/', [StudentController::class, 'index'])->name('index');
+            Route::post('/create', [StudentController::class, 'store'])->name('store');
+            Route::get('/delete/{id}', [StudentController::class, 'destroy'])->name('delete');
+            Route::patch('/update-status/{id}', [StudentController::class, 'updateStatus'])->name('update-status');
+            Route::get('/edit/{category}', [StudentController::class, 'edit'])->name('edit');
+            Route::post('/{category}', [StudentController::class, 'update'])->name('update');
         });
 
 
