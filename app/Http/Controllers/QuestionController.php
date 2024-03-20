@@ -26,46 +26,6 @@ class QuestionController extends Controller
         return view('admin.partials.question.create');
     }
 
-    /* public function store(Request $request, Quiz $quiz)
-     {
-         // Validate the incoming request data
-         $validatedData = $request->validate([
-             'question_text' => 'required',
-             'answer_type' => 'required',
-             'choice' => 'required',
-             'choice.*' => 'required',
-             'is_correct' => 'required' . implode(',', array_keys($request->input('choice', []))),
-         ]);
-
-         try {
-             $isCorrect = $validatedData['is_correct'];
-             $options = collect($validatedData['choice'])->filter(fn($value) => $value !== null);
-
-             DB::beginTransaction();
-             $formatData = [
-                 'question_text' => $validatedData['question_text'],
-                 'answer_type' => $validatedData['answer_type'],
-             ];
-
-             $question = $quiz->questions()->create($formatData);
-
-             foreach ($options as $key => $option) {
-                 $formatOptions = [
-                     'choice' => $option,
-                     'is_correct' => $isCorrect == $key ? 1 : 0,
-                 ];
-
-                 $question->options()->create($formatOptions);
-             }
-             DB::commit();
-
-             return redirect()->back()->with('success', 'Question added successfully.');
-         } catch (\Exception $e) {
-             DB::rollBack();
-             return redirect()->back()->with('error', 'Something went wrong. Error: ' . $e->getMessage());
-         }
-     }*/
-
     public function store(Request $request, Quiz $quiz)
     {
         /*$validatedData = $request->validate([
