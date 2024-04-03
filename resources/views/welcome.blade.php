@@ -39,7 +39,7 @@
                 </button>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="{{ secure_asset('secure_asset/img/logo/2.png') }}" alt="hero-image">
+                <img src="{{ secure_asset('asset/img/logo/2.png') }}" alt="hero-image">
             </div>
         </div>
     </section>
