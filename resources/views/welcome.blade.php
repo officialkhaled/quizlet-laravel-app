@@ -39,7 +39,7 @@
                 </button>
             </div>
             <div class="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                <img src="{{ asset('asset/img/logo/2.png') }}" alt="hero-image">
+                <img src="{{ secure_asset('secure_asset/img/logo/2.png') }}" alt="hero-image">
             </div>
         </div>
     </section>
@@ -53,19 +53,19 @@
                 <div class="relative h-56 overflow-hidden md:h-96">
                     <!-- Item 1 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="{{ asset('asset/img/banner.png') }}"
+                        <img src="{{ secure_asset('asset/img/banner.png') }}"
                              class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                              alt="...">
                     </div>
                     <!-- Item 2 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="{{ asset('asset/img/banner.png') }}"
+                        <img src="{{ secure_asset('asset/img/banner.png') }}"
                              class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                              alt="...">
                     </div>
                     <!-- Item 3 -->
                     <div class="hidden duration-700 ease-in-out" data-carousel-item>
-                        <img src="{{ asset('asset/img/banner.png') }}"
+                        <img src="{{ secure_asset('asset/img/banner.png') }}"
                              class="absolute block w-full -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2"
                              alt="...">
                     </div>
